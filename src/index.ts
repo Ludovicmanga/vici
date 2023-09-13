@@ -1,8 +1,5 @@
-import express from 'express';
-import flashCardsRouter from '../routes/flashcards.routes';
+import app from './app';
 
-const app = express();
-
-app.use('/flash-cards', flashCardsRouter);
-
-export default app;
+app.listen(3000, function(){
+    console.log("API en cours d'exécution sur le port 3000");
+});
