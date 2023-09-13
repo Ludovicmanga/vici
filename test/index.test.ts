@@ -24,8 +24,8 @@ describe("Flash cards API", () => {
     }
   });
 
-  it("POST -> Create a flash card", async () => {
-    const response = await request(app)
+  it("POST -> Create, then Delete a flash card", async () => {
+    const createResponse = await request(app)
       .post("/flash-cards/create")
       .send({
         question: "test question",
@@ -35,7 +35,7 @@ describe("Flash cards API", () => {
       .expect("Content-type", /json/)
       .expect(200);
 
-    expect(response.body).toEqual(
+    expect(createResponse.body).toEqual(
       expect.objectContaining({
         id: expect.any(Number),
         question: expect.any(String),
@@ -44,10 +44,11 @@ describe("Flash cards API", () => {
       })
     );
 
-    await prisma.flashCard.delete({
-      where: {
-        question: "test question",
-      },
-    });
+    await request(app)
+      .delete("/flash-cards/delete")
+      .send({
+        id: createResponse.body.id,
+      })
+      .expect(204);
   });
 });

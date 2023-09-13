@@ -5,7 +5,7 @@ export const getAllFlashcards = async (req, res, next) => {
     const allCards = await prisma.flashCard.findMany();
     res.status(200).json(allCards);
   } catch (e) {
-    console.log(e, ' is the error man...');
+    console.log(e, " is the error man...");
     res.send(500);
   }
 };
@@ -18,7 +18,24 @@ export const createFlashCard = async (req, res, next) => {
     });
     res.send(user);
   } catch (e) {
-    console.log(e, ' is the error man...');
+    console.log(e, " is the error man...");
+    res.send(500);
+  }
+};
+
+export const deleteFlashCard = async (req, res, next) => {
+  try {
+    const { id } = req.body;
+    const deleted = await prisma.flashCard.delete({
+    where: {
+        id,
+    }});
+    if (deleted) {
+        console.log(deleted);
+        res.send(204);
+    }
+  } catch (e) {
+    console.log(e, " is the error man...");
     res.send(500);
   }
 };
