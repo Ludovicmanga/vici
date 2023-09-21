@@ -1,0 +1,31 @@
+.container {
+    min-height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+.left {
+    display: flex;
+    align-items: center;
+}
+
+.menuBtn {
+    cursor: pointer;
+}
+
+.title {
+    padding: 0 0 0 1.5rem;
+    font-size: 1.6rem;
+    font-weight: 500;
+}
+
+.drawer {
+    width: 30%;
+}
+
+.drawerMenu {
+    background: red;
+    padding: 1rem;
+}
