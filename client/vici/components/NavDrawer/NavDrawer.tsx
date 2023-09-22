@@ -1,6 +1,7 @@
 import React from "react";
 import { Drawer } from "@mui/material";
 import styles from "./NavDrawer.module.scss";
+import Link from "next/link";
 
 type Props = {
   isOpen: boolean;
@@ -19,10 +20,34 @@ const NavDrawer = (props: Props) => {
     >
       <nav className={styles.container}>
         <div className={styles.ul}>
-          <div className={styles.li}>Train</div>
-          <div className={styles.li}>Manage cards</div>
-          <div className={styles.li}>Manage categories</div>
-          <div className={styles.li}>Share with friends</div>
+          <Link
+            href="/"
+            onClick={() => props.setIsOpen(false)}
+            className={styles.li}
+          >
+            Train
+          </Link>
+          <Link
+            href="/manageCards"
+            onClick={() => props.setIsOpen(false)}
+            className={styles.li}
+          >
+            Manage cards
+          </Link>
+          <Link
+            href="/manageCategories"
+            onClick={() => props.setIsOpen(false)}
+            className={styles.li}
+          >
+            Manage categories
+          </Link>
+          <Link
+            href="/share"
+            onClick={() => props.setIsOpen(false)}
+            className={styles.li}
+          >
+            Share with friends
+          </Link>
         </div>
       </nav>
     </Drawer>
