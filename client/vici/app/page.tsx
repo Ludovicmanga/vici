@@ -1,15 +1,14 @@
+
 export default async function Home() {
-  try {
-    const all = await fetch(`${process.env.BACKEND_URL}/flash-cards/all`, {
-      method: 'GET',
-    });
-    console.log(await all.json(), ' is the res');
-  } catch (e) {
-    console.log(e, " is the error");
-  }
+  const all = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/flash-cards/all`, {
+    method: "GET",
+  });
+  const allAwaited = await all.json();
   return (
     <main>
-      <div>Home</div>
+      <div>
+        Home
+      </div>
     </main>
   );
 }

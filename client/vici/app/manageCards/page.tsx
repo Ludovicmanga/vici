@@ -1,11 +1,16 @@
-import React from 'react'
+import { Autocomplete, Button, Paper, TextField } from "@mui/material";
+import React from "react";
+import styles from "./page.module.scss";
+import CreateForm from "@/components/createForm/CreateForm";
 
-type Props = {}
+type Props = {};
 
 const page = (props: Props) => {
   return (
-    <div>Manage cards</div>
-  )
-}
+    <div className={styles.container}>
+        <CreateForm />
+    </div>
+  );
+};
 
-export default page
+export default page;
