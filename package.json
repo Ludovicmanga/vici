@@ -5,6 +5,7 @@
   "main": "lib/src/index.js",
   "scripts": {
     "start:dev": "npx nodemon",
+    "prisma": "npx prisma migrate dev --name init && npx prisma db push",
     "test": "jest --watch --verbose"
   },
   "repository": {

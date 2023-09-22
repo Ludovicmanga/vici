@@ -1,14 +1,27 @@
+import CardBox from "@/components/CardBox/CardBox";
 
 export default async function Home() {
-  const all = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/flash-cards/all`, {
-    method: "GET",
-  });
-  const allAwaited = await all.json();
+  console.log(`${process.env.NEXT_PUBLIC_BACKEND_URL}/flash-cards/all`, 'was sent')
+  const allCardsResponse = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/flash-cards/all`,
+    {
+      method: "GET",
+      mode: "cors",
+    }
+  );
+  const allCards: {
+    id: number;
+    question: string;
+    answer: string;
+    known: string;
+  }[] = await allCardsResponse.json();
+
+  
   return (
-    <main>
-      <div>
-        Home
-      </div>
-    </main>
+    <div>
+      {allCards.map((card) => (
+        <CardBox key={card.id} card={card} />
+      ))}
+    </div>
   );
 }
