@@ -20,4 +20,5 @@ model FlashCard {
   question String @unique
   answer   String
   category String
+  known String
 }
