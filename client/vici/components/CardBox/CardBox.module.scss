@@ -1,0 +1,21 @@
+.container {
+    margin: 2rem 8rem;
+    background: #98B4D4;
+    min-height: 400px;
+    padding: 0 0.4rem;
+}
+
+.input {
+    margin: 2rem 0;
+}
+
+.cardTitleContainer {
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem 0;
+}
+
+.cardTitle {
+    margin: 1rem 0 0 1rem;
+    font-weight: 600;
+}
