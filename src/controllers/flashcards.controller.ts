@@ -12,11 +12,11 @@ export const getAllFlashcards = async (req, res, next) => {
 
 export const createFlashCard = async (req, res, next) => {
   try {
-    const { question, answer, category } = req.body;
-    const user = await prisma.flashCard.create({
-      data: { question, answer, category },
+     const { question, answer, category } = req.body;
+    const flashCard = await prisma.flashCard.create({
+      data: { question, answer, category, known: 'nop' },
     });
-    res.send(user);
+    res.send(flashCard);
   } catch (e) {
     console.log(e, " is the error man...");
     res.send(500);

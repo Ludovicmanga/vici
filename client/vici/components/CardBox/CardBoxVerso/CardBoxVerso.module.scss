@@ -1,0 +1,31 @@
+.answerContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 3rem;
+}
+
+.isKnownAnswerSectionContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.isKnownAnswerSection {
+    width: 40%;
+}
+
+.isKnownAnswerSectionTitle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 0;
+}
+
+.btnGroupContainer {
+    display: flex;
+}
+
+.btn {
+    margin: 0.5rem;
+}
