@@ -1,7 +1,6 @@
 import prisma from "../../prisma/prismaClient";
 
 export const getAllFlashcards = async (req, res, next) => {
-  console.log('received');
   try {
     const allCards = await prisma.flashCard.findMany();
     res.status(200).json(allCards);

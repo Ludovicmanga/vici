@@ -1,13 +1,13 @@
-import CardBox from "@/components/CardBox/CardBox";
+import CardsContainer from "@/components/CardsContainer/CardsContainer";
 
 export default async function Home() {
-  console.log(`${process.env.NEXT_PUBLIC_BACKEND_URL}/flash-cards/all`, 'was sent')
   const allCardsResponse = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/flash-cards/all`,
     {
       method: "GET",
       mode: "cors",
-    }
+      cache: 'no-store'
+    },
   );
   const allCards: {
     id: number;
@@ -15,13 +15,11 @@ export default async function Home() {
     answer: string;
     known: string;
   }[] = await allCardsResponse.json();
-
+  
   
   return (
     <div>
-      {allCards.map((card) => (
-        <CardBox key={card.id} card={card} />
-      ))}
+      <CardsContainer cardsList={allCards} />
     </div>
   );
 }

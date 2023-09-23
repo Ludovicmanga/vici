@@ -32,7 +32,7 @@ const NavDrawer = (props: Props) => {
             onClick={() => props.setIsOpen(false)}
             className={styles.li}
           >
-            Manage cards
+            Create cards
           </Link>
           <Link
             href="/manageCategories"

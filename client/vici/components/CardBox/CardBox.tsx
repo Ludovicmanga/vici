@@ -1,4 +1,11 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
+import { Button, Card, CardContent } from "@mui/material";
+import styles from "./CardBox.module.scss";
+import { BiSolidRightArrow } from "react-icons/bi";
+import CardBoxRecto from "./CardBoxRecto/CardBoxRecto";
+import CardBoxVerso from "./CardBoxVerso/CardBoxVerso";
 
 type Props = {
   card: {
@@ -7,15 +14,31 @@ type Props = {
     answer: string;
     known: string;
   };
+  setNextActiveCard: () => void
 };
 
 const CardBox = (props: Props) => {
+  const [isFlipped, setIsFlipped] = useState(false);
+  const flipTheCard = () => {
+    setIsFlipped(true);
+  };
+
   return (
-    <div>
-      <div>question: {props.card.question}</div>
-      <div>answer: {props.card.answer}</div>
-      <div>known ? {props.card.known}</div>
-    </div>
+    <Card className={styles.container}>
+      <CardContent>
+        <div className={styles.cardTitleContainer}>
+          <div className={styles.cardTitle}>{isFlipped ? 'Answer' : 'Question'}</div>
+          <Button onClick={props.setNextActiveCard} variant="contained" startIcon={<BiSolidRightArrow />}>
+            Next card
+          </Button>
+        </div>
+        {isFlipped ? (
+          <CardBoxVerso card={props.card} />
+        ) : (
+          <CardBoxRecto card={props.card} flipTheCard={flipTheCard} />
+        )}
+      </CardContent>
+    </Card>
   );
 };
 
