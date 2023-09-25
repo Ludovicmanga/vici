@@ -28,25 +28,11 @@ const NavDrawer = (props: Props) => {
             Train
           </Link>
           <Link
-            href="/manageCards"
+            href="/createCards"
             onClick={() => props.setIsOpen(false)}
             className={styles.li}
           >
             Create cards
-          </Link>
-          <Link
-            href="/manageCategories"
-            onClick={() => props.setIsOpen(false)}
-            className={styles.li}
-          >
-            Manage categories
-          </Link>
-          <Link
-            href="/share"
-            onClick={() => props.setIsOpen(false)}
-            className={styles.li}
-          >
-            Share with friends
           </Link>
         </div>
       </nav>
