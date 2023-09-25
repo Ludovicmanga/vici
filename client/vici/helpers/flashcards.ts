@@ -13,5 +13,5 @@ export const updateKnowledgeLevel = async (initialCard: FlashCard, selectedBtn: 
         }),
       }
     );
-    console.log(response, " is the res");
+    return response;
   };

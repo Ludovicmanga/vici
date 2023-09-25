@@ -1,4 +1,5 @@
 import CardsContainer from "@/components/CardsContainer/CardsContainer";
+import { FlashCard } from "@/types/constants";
 
 export default async function Home() {
   const allCardsResponse = await fetch(
@@ -9,12 +10,7 @@ export default async function Home() {
       cache: 'no-store'
     },
   );
-  const allCards: {
-    id: number;
-    question: string;
-    answer: string;
-    known: string;
-  }[] = await allCardsResponse.json();
+  const allCards: FlashCard[] = await allCardsResponse.json();
   
   
   return (

@@ -2,14 +2,10 @@ import React from "react";
 import { Button } from "@mui/material";
 import styles from "./CardBoxRecto.module.scss";
 import FlipCameraAndroidIcon from "@mui/icons-material/FlipCameraAndroid";
+import { FlashCard } from "@/types/constants";
 
 type Props = {
-  card: {
-    id: number;
-    question: string;
-    answer: string;
-    known: string;
-  };
+  card: FlashCard;
   flipTheCard: () => void
 };
 

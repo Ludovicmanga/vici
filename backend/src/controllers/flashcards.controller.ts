@@ -14,7 +14,7 @@ export const createFlashCard = async (req, res, next) => {
   try {
      const { question, answer, category } = req.body;
     const flashCard = await prisma.flashCard.create({
-      data: { question, answer, category, known: 'terrible' },
+      data: { question, answer, category, known: 1 },
     });
     res.send(flashCard);
   } catch (e) {
