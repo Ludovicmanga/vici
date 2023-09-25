@@ -6,14 +6,10 @@ import styles from "./CardBox.module.scss";
 import { BiSolidRightArrow } from "react-icons/bi";
 import CardBoxRecto from "./CardBoxRecto/CardBoxRecto";
 import CardBoxVerso from "./CardBoxVerso/CardBoxVerso";
+import { FlashCard } from "@/types/constants";
 
 type Props = {
-  card: {
-    id: number;
-    question: string;
-    answer: string;
-    known: string;
-  };
+  card: FlashCard;
   setNextActiveCard: () => void
 };
 
