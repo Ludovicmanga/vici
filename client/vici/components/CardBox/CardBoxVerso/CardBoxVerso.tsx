@@ -7,71 +7,73 @@ import { FlashCard } from "@/types/constants";
 
 type Props = {
   card: FlashCard;
-  setNextActiveCard: () => void
+  setNextActiveCard: () => void;
 };
 
 const CardBoxVerso = (props: Props) => {
-
-  const handleUpdateKnowledgeLevel = async (updatedKnowledgeLevel: KnownledgeLevel) => {
-    const response = await updateKnowledgeLevel(props.card, updatedKnowledgeLevel);
+  const handleUpdateKnowledgeLevel = async (
+    updatedKnowledgeLevel: KnownledgeLevel
+  ) => {
+    const response = await updateKnowledgeLevel(
+      props.card,
+      updatedKnowledgeLevel
+    );
     if (response) {
       props.setNextActiveCard();
     }
-  }
+  };
 
-  const firstLineBtns = [
+  const btns = [
     {
-      label: "Very well",
+      label: "Parfaitement",
       type: KnownledgeLevel.veryWell,
+      icon: <div>😍</div>
     },
     {
-      label: "Good",
+      label: "Bien",
       type: KnownledgeLevel.good,
+      icon: <div>😎</div>
     },
-  ];
-  const secondLineBtns = [
     {
-      label: "So so",
+      label: "Bof",
       type: KnownledgeLevel.soso,
+      icon: <div>🙄</div>
     },
     {
-      label: "Terrible",
+      label: "Pas du tout",
       type: KnownledgeLevel.terrible,
+      icon: <div>🤬</div>
     },
   ];
 
   return (
-    <div>
+    <div className={styles.container}>
       <div className={styles.answerContainer}>{props.card.answer}</div>
       <div className={styles.isKnownAnswerSectionContainer}>
         <div className={styles.isKnownAnswerSection}>
           <div className={styles.isKnownAnswerSectionTitle}>
-            I know this answer...
+            Je connais cette réponse...
           </div>
           <div className={styles.btnGroupContainer}>
-            {firstLineBtns.map((btn) => (
-              <Button
-                key={btn.type}
-                onClick={async () => await handleUpdateKnowledgeLevel(btn.type)}
-                className={styles.btn}
-                variant="contained"
-                fullWidth
-              >
-                {btn.label}
-              </Button>
-            ))}
-          </div>
-          <div className={styles.btnGroupContainer}>
-            {secondLineBtns.map((btn) => (
-              <Button
-                key={btn.type}
-                onClick={async () => await handleUpdateKnowledgeLevel(btn.type)}
-                className={styles.btn}
-                variant="contained"
-                fullWidth
-              >
-                {btn.label}
-              </Button>
+            {btns.map((btn) => (
+              <div className={styles.btnContainer} key={btn.type}>
+                <Button
+                  onClick={async () =>
+                    await handleUpdateKnowledgeLevel(btn.type)
+                  }
+                  className={styles.btn}
+                  variant="contained"
+                  startIcon={btn.icon}
+                  sx={{
+                    width: '100%',
+                    maxWidth: '100%',
+                    display: 'flex',
+                    justifyContent: 'flex-start'
+                  }}
+                >
+                  <div className={styles.btnLabel}>{btn.label}</div>
+                </Button>
+              </div>
             ))}
           </div>
         </div>

@@ -10,7 +10,7 @@ import { FlashCard } from "@/types/constants";
 
 type Props = {
   card: FlashCard;
-  setNextActiveCard: () => void
+  setNextActiveCard: () => void;
 };
 
 const CardBox = (props: Props) => {
@@ -20,21 +20,32 @@ const CardBox = (props: Props) => {
   };
 
   return (
-    <Card className={styles.container}>
-      <CardContent>
-        <div className={styles.cardTitleContainer}>
-          <div className={styles.cardTitle}>{isFlipped ? 'Answer' : 'Question'}</div>
-          <Button onClick={props.setNextActiveCard} variant="contained" startIcon={<BiSolidRightArrow />}>
-            Next card
-          </Button>
-        </div>
-        {isFlipped ? (
-          <CardBoxVerso setNextActiveCard={props.setNextActiveCard} card={props.card} />
-        ) : (
-          <CardBoxRecto card={props.card} flipTheCard={flipTheCard} />
-        )}
-      </CardContent>
-    </Card>
+    <div className={styles.container}>
+      <Card className={styles.cardContainer}>
+        <CardContent>
+          <div className={styles.top}>
+            <div className={styles.cardTitle}>
+              {isFlipped ? "🤯 Réponse" : "🤔 Question"}
+            </div>
+            <Button
+              onClick={props.setNextActiveCard}
+              variant="contained"
+              startIcon={<div>👉</div>}
+            >
+              Carte suivante
+            </Button>
+          </div>
+          {isFlipped ? (
+              <CardBoxVerso
+                setNextActiveCard={props.setNextActiveCard}
+                card={props.card}
+              />
+            ) : (
+              <CardBoxRecto card={props.card} flipTheCard={flipTheCard} />
+            )}
+        </CardContent>
+      </Card>
+    </div>
   );
 };
 

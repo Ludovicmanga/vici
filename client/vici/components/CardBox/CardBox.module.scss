@@ -1,5 +1,12 @@
 .container {
-    margin: 2rem 8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cardContainer {
+    margin: 3rem 0 0 0;
+    width: 60%;
     background: #98B4D4;
     min-height: 400px;
     padding: 0 0.4rem;
@@ -9,13 +16,16 @@
     margin: 2rem 0;
 }
 
-.cardTitleContainer {
+.top {
     display: flex;
     justify-content: space-between;
     margin: 2rem 0;
+    height: 25%;
 }
 
 .cardTitle {
+    font-size: 2rem;
     margin: 1rem 0 0 1rem;
     font-weight: 600;
 }
+
