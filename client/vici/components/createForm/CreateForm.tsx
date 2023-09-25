@@ -50,8 +50,11 @@ const CreateForm = (props: Props) => {
         </div>
         <div className={styles.input}>
           <Autocomplete
-            options={["GIEC", "Amusement"]}
+            freeSolo
+            autoSelect
+            options={[]}
             onInputChange={(e, value) => setCategory(value)}
+            onChange={(e, value) => console.log('value', e, value)}
             renderInput={(params) => (
               <TextField key={params.id} {...params} label="Categorie" />
             )}

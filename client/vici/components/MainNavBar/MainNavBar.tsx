@@ -25,7 +25,7 @@ const MainNavBar = (props: Props) => {
         <div className={styles.title}>Vici</div>
       </div>
       <Link href="#" className={styles.right}>
-        Login
+        Se connecter
       </Link>
     </div>
   );
