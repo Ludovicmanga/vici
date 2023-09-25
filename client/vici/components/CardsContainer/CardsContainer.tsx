@@ -2,25 +2,41 @@
 
 import React, { useEffect, useState } from "react";
 import CardBox from "../CardBox/CardBox";
+import { FlashCard } from "@/types/constants";
 
 type Props = {
-  cardsList: {
-    id: number;
-    question: string;
-    answer: string;
-    known: string;
-  }[];
+  cardsList: FlashCard[];
 };
 
 const CardsContainer = (props: Props) => {
   const [activeCard, setActiveCard] = useState(props.cardsList[0]);
 
   const setNextActiveCard = () => {
-    const indexOfActiveCard = props.cardsList.indexOf(activeCard);
-    props.cardsList[indexOfActiveCard + 1]
-      ? setActiveCard(props.cardsList[indexOfActiveCard + 1])
-      : setActiveCard(props.cardsList[0]);
+    const nextCard = selectRandomItem();
+    if (nextCard) {
+      setActiveCard(nextCard);
+    }
   };
+  const cardsListWithoutCurrent = props.cardsList.filter(
+    (card) => card.id !== activeCard.id
+  );
+  const totalImportance = cardsListWithoutCurrent.reduce(
+    (total, item) => total + item.known,
+    0
+  );
+
+  function selectRandomItem() {
+    const randomValue = Math.random() * totalImportance;
+    let cumulativeImportance = 0;
+
+    for (const item of cardsListWithoutCurrent) {
+      cumulativeImportance += item.known;
+
+      if (randomValue <= cumulativeImportance) {
+        return item;
+      }
+    }
+  }
 
   return (
     <CardBox
