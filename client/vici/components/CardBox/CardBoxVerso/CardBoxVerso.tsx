@@ -7,9 +7,17 @@ import { FlashCard } from "@/types/constants";
 
 type Props = {
   card: FlashCard;
+  setNextActiveCard: () => void
 };
 
 const CardBoxVerso = (props: Props) => {
+
+  const handleUpdateKnowledgeLevel = async (updatedKnowledgeLevel: KnownledgeLevel) => {
+    const response = await updateKnowledgeLevel(props.card, updatedKnowledgeLevel);
+    if (response) {
+      props.setNextActiveCard();
+    }
+  }
 
   const firstLineBtns = [
     {
@@ -44,7 +52,7 @@ const CardBoxVerso = (props: Props) => {
             {firstLineBtns.map((btn) => (
               <Button
                 key={btn.type}
-                onClick={() => updateKnowledgeLevel(props.card, btn.type)}
+                onClick={async () => await handleUpdateKnowledgeLevel(btn.type)}
                 className={styles.btn}
                 variant="contained"
                 fullWidth
@@ -57,7 +65,7 @@ const CardBoxVerso = (props: Props) => {
             {secondLineBtns.map((btn) => (
               <Button
                 key={btn.type}
-                onClick={() => updateKnowledgeLevel(props.card, btn.type)}
+                onClick={async () => await handleUpdateKnowledgeLevel(btn.type)}
                 className={styles.btn}
                 variant="contained"
                 fullWidth

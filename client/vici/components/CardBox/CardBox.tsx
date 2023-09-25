@@ -33,7 +33,7 @@ const CardBox = (props: Props) => {
           </Button>
         </div>
         {isFlipped ? (
-          <CardBoxVerso card={props.card} />
+          <CardBoxVerso setNextActiveCard={props.setNextActiveCard} card={props.card} />
         ) : (
           <CardBoxRecto card={props.card} flipTheCard={flipTheCard} />
         )}
