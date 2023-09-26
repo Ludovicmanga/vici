@@ -9,7 +9,7 @@ type Props = {};
 const page = (props: Props) => {
   return (
     <div className={styles.container}>
-      <PageTitleSection emoji={<div>🧠</div>} text="Créer de nouvelles cartes" />
+      <PageTitleSection emoji={<div>✍</div>} text="Créer de nouvelles cartes" />
       <CreateForm />
     </div>
   );

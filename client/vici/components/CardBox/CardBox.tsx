@@ -11,6 +11,7 @@ import { FlashCard } from "@/types/constants";
 type Props = {
   card: FlashCard;
   setNextActiveCard: () => void;
+  disableNextBtn: boolean;
 };
 
 const CardBox = (props: Props) => {
@@ -31,6 +32,7 @@ const CardBox = (props: Props) => {
               onClick={props.setNextActiveCard}
               variant="contained"
               startIcon={<div>👉</div>}
+              disabled={props.disableNextBtn}
             >
               Carte suivante
             </Button>
