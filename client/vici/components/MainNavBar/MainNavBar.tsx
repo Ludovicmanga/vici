@@ -5,6 +5,7 @@ import styles from "./MainNavBar.module.scss";
 import { AiOutlineMenu } from "react-icons/ai";
 import Link from "next/link";
 import NavDrawer from "../NavDrawer/NavDrawer";
+import { signIn, signOut, useSession } from 'next-auth/react';
 
 type Props = {};
 
@@ -14,6 +15,8 @@ const MainNavBar = (props: Props) => {
   const handleToggleDrawer = () => {
     setDrawerIsOpen(!drawerIsOpen);
   };
+
+  const session = useSession();
 
   return (
     <div className={styles.container}>
@@ -25,7 +28,7 @@ const MainNavBar = (props: Props) => {
         <div className={styles.title}>Vici</div>
       </div>
       <Link href="#" className={styles.right}>
-        Se connecter
+        { session.data?.user ? <div onClick={() => signOut()}>Se déconnecter</div> : <div onClick={() => signIn()}>Se connecter</div> }
       </Link>
     </div>
   );

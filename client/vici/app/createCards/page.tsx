@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./page.module.scss";
-import CreateForm from "@/components/createForm/CreateForm";
+import CreateForm from "@/components/CreateForm/CreateForm";
 
 type Props = {};
 
