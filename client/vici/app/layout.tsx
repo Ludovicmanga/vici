@@ -6,9 +6,7 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import MainNavBar from "@/components/MainNavBar/MainNavBar";
-import { getServerSession } from "next-auth";
-import SessionProvider from "@/components/SessionProvider/SessionProvider";
-import { redirect } from 'next/navigation'
+import LoginForm from "@/components/LoginForm/LoginForm";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,21 +20,35 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await getServerSession();
+  const checkUserIsLoggedIn = async () => {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/check-auth`,
+      {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+      }
+    );
+    const resData = await response.json();
+    if (resData.user) {
+      return resData.user;
+    } else {
+      return null;
+    }
+  };
 
-  if (session?.user) {
-    return (
-      <html lang="fr">
-        <body className={inter.className}>
-          <SessionProvider session={session}>
+  const loggedUser = await checkUserIsLoggedIn();
+  return (
+    <html lang="fr">
+      <body className={inter.className}>
+        {loggedUser ? (
+          <>
             <MainNavBar />
             {children}
-          </SessionProvider>
-        </body>
-      </html>
-    );
-  } else {
-    redirect('/api/auth/signin');
-  }
-  
+          </>
+        ) : (
+          <LoginForm />
+        )}
+      </body>
+    </html>
+  );
 }

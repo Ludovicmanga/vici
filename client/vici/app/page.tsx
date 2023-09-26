@@ -7,11 +7,11 @@ export default async function Home() {
     {
       method: "GET",
       mode: "cors",
-      cache: 'no-store'
+      cache: 'no-store',
+      credentials: 'include',
     },
   );
   const allCards: FlashCard[] = await allCardsResponse.json();
-  
   
   return (
     <div>
