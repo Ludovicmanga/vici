@@ -43,6 +43,7 @@ const CardsContainer = (props: Props) => {
       key={activeCard.id}
       card={activeCard}
       setNextActiveCard={setNextActiveCard}
+      disableNextBtn={props.cardsList.length <= 1}
     />
   );
 };

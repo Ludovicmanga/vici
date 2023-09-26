@@ -1,12 +1,23 @@
+
+
 .questionContainer {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 3rem;
+    margin: 6.5rem 4rem;
+    font-size: 2.5rem;
+}
+
+.btnSectionContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .btnContainer {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 1rem;
+    height: 5rem;
 }

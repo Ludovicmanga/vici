@@ -3,9 +3,10 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem;
-    background: #a0e7e9;
+    padding: 0 3rem 0 1.8rem;
+    background: #1a73e8;
     border: solid black 0.1px;
+    color: white;
 }
 
 .left {
@@ -28,6 +29,5 @@
 }
 
 .drawerMenu {
-    background: red;
     padding: 1rem;
 }

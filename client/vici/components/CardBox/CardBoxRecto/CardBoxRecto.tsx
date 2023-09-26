@@ -6,21 +6,27 @@ import { FlashCard } from "@/types/constants";
 
 type Props = {
   card: FlashCard;
-  flipTheCard: () => void
+  flipTheCard: () => void;
 };
 
 const CardBoxRecto = (props: Props) => {
   return (
-    <div>
+    <div className={styles.container}>
       <div className={styles.questionContainer}>{props.card.question}</div>
-      <div className={styles.btnContainer}>
-        <Button
-          onClick={props.flipTheCard}
-          variant="contained"
-          startIcon={<FlipCameraAndroidIcon />}
-        >
-          Flip the card
-        </Button>
+      <div className={styles.btnSectionContainer}>
+        <div className={styles.btnContainer}>
+          <Button
+            onClick={props.flipTheCard}
+            variant="contained"
+            startIcon={<div>👀</div>}
+            sx={{
+              height: "100%",
+              width: "100%",
+            }}
+          >
+            Voir la réponse
+          </Button>
+        </div>
       </div>
     </div>
   );

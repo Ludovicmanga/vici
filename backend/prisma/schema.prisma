@@ -11,14 +11,27 @@ datasource db {
 }
 
 model User {
-  id    Int    @id @default(autoincrement())
-  email String @unique
+  id        Int         @id @default(autoincrement())
+  email     String      @unique
+  FlashCard FlashCard[]
+  Categoy   Category[]
 }
 
 model FlashCard {
-  id       Int    @id @default(autoincrement())
-  question String @unique
-  answer   String
-  category String
-  known    Int
+  id         Int      @id @default(autoincrement())
+  question   String   @unique
+  answer     String
+  category   Category @relation(fields: [categoryId], references: [id])
+  author     User     @relation(fields: [userId], references: [id])
+  known      Int
+  categoryId Int
+  userId     Int
+}
+
+model Category {
+  id        Int         @id @default(autoincrement())
+  name      String      @unique
+  FlashCard FlashCard[]
+  author    User        @relation(fields: [userId], references: [id])
+  userId    Int
 }

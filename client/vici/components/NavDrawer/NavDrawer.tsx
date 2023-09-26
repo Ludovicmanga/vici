@@ -15,7 +15,7 @@ const NavDrawer = (props: Props) => {
       open={props.isOpen}
       onClose={() => props.setIsOpen(false)}
       PaperProps={{
-        sx: { width: "20%" },
+        sx: { width: "26%" },
       }}
     >
       <nav className={styles.container}>
@@ -25,14 +25,16 @@ const NavDrawer = (props: Props) => {
             onClick={() => props.setIsOpen(false)}
             className={styles.li}
           >
-            Train
+            <div className={styles.emoji}>💪</div>
+            <div className={styles.navText}>S'entrainer</div>
           </Link>
           <Link
             href="/createCards"
             onClick={() => props.setIsOpen(false)}
             className={styles.li}
           >
-            Create cards
+            <div className={styles.emoji}>✍</div>
+            <div className={styles.navText}> Créer des cartes</div>
           </Link>
         </div>
       </nav>
