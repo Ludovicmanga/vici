@@ -17,6 +17,7 @@ export const createFlashCard = async (req, res, next) => {
       data: {
         question,
         answer,
+        author: req.user.id,
         category: {
           connectOrCreate: {
             where: {
@@ -24,6 +25,7 @@ export const createFlashCard = async (req, res, next) => {
             },
             create: {
               name: category,
+              author: req.user.id
             },
           },
         },
