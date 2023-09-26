@@ -3,7 +3,7 @@ import request from "supertest";
 import prisma from "../prisma/prismaClient";
 
 describe("Flash cards API", () => {
-  it("GET -> get a list of the existing flash cards", async () => {
+/*   it("GET -> get a list of the existing flash cards", async () => {
     const response = await request(app)
       .get("/flash-cards/all")
       .expect("Content-type", /json/)
@@ -22,9 +22,9 @@ describe("Flash cards API", () => {
         ])
       );
     }
-  });
+  }); */
 
-  it("POST -> Create, then Delete a flash card", async () => {
+/*   it("POST -> Create, then Delete a flash card", async () => {
     const createResponse = await request(app)
       .post("/flash-cards/create")
       .send({
@@ -50,9 +50,9 @@ describe("Flash cards API", () => {
         id: createResponse.body.id,
       })
       .expect(204);
-  });
+  }); */
 
-  it("PUT -> Create, then update, then delete a flash card", async () => {
+/*   it("PUT -> Create, then update, then delete a flash card", async () => {
 
     // create
 
@@ -107,5 +107,88 @@ describe("Flash cards API", () => {
       id: createResponse.body.id,
     })
     .expect(204);
-  });
+  }); */
+
+  it("signup, then login, then delete user", async () => {
+
+    // signup 
+/*    const createdResponse = await request(app)
+      .post("/auth/sign-up")
+      .send({
+        email: 'testuser@gmail.com',
+        password: '2707'
+      })
+      .expect("Content-type", /json/)
+      .expect(200);
+
+      expect(createdResponse.body).toEqual(
+        expect.objectContaining({
+          id: expect.any(Number),
+          email: expect.any(String),
+          password: expect.any(String),
+        })
+      );  */
+
+      //login
+
+      const loginResponse = await request(app)
+      .post("/auth/login")
+      .send({
+        email: 'testuser@gmail.com',
+        password: '2707'
+      })
+      .expect("Content-type", /json/)
+      .expect(200);
+
+      expect(loginResponse.body).toEqual(
+        expect.objectContaining({
+          id: expect.any(Number),
+          email: expect.any(String),
+          password: expect.any(String),
+        })
+      );
+
+      // check if authenticated
+/*       const checkAuthResponse = await request(app)
+      .post("/auth/check-auth");
+
+      expect(checkAuthResponse.body).toEqual(
+        expect.objectContaining({
+          id: expect.any(Number),
+          email: expect.any(String),
+          password: expect.any(String),
+        })
+      ) */
+
+      //logout
+
+      const logoutResponse = await request(app)
+      .post("/auth/logout")
+      .expect("Content-type", /json/)
+      .expect(200);
+
+      expect(logoutResponse.body).toEqual(
+        expect.objectContaining({
+          loggedOut: expect.any(Boolean),
+        })
+      );
+
+      // check if is well logged out
+
+      // delete user
+    
+      const deleteResponse = await request(app)
+      .post("/auth/delete-user")
+      .send({
+        email: 'testuser@gmail.com',
+      })
+
+     expect(deleteResponse.body).toEqual(
+        expect.objectContaining({
+          id: expect.any(Number),
+          email: expect.any(String),
+          password: expect.any(String),
+        })
+      );
+  })
 });

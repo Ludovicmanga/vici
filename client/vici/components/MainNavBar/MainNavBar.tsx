@@ -15,6 +15,7 @@ const MainNavBar = (props: Props) => {
     setDrawerIsOpen(!drawerIsOpen);
   };
 
+
   return (
     <div className={styles.container}>
       <NavDrawer isOpen={drawerIsOpen} setIsOpen={setDrawerIsOpen} />
