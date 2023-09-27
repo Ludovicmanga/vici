@@ -1,0 +1,21 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.formWrapper {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    margin: 4rem 0;
+    width: 50%;
+}
+
+.input {
+    margin: 1rem 0;
+}
+
+.noAccountYetText {
+    margin: 1rem 0 0 0;
+}
