@@ -1,0 +1,67 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+}
+
+.wrapper {
+    display: flex;
+    height: 95%;
+    width: 95%;
+    background: #0044FF1E;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    padding: 3rem;
+}
+
+.subWrapper {
+    display: flex;
+}
+.imgContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bottomContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 0 0 4rem;
+}
+
+.mainText {
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    font-size: 1.4rem;
+    margin: 1em 0;
+    font-weight: 600;
+}
+
+.btnContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0 0 0;
+}
+
+.rightHandEmoji {
+    margin: 0 2rem 0 0;
+    font-size: 3rem;
+}
+
+.leftHandEmoji {
+    margin: 0 0 0 2rem;
+    font-size: 3rem;
+}
+
+.titleEmoji {
+    font-size: 2rem;
+}
+
+.titleEmojiLeft {
+    margin: 0 0 0 0.8rem;
+}
