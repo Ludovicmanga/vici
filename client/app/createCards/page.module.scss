@@ -1,0 +1,54 @@
+.container {
+    display: flex;
+}
+
+.section {
+    padding: 2rem 3rem;
+    margin: 0.6rem;
+}
+
+.left {
+    width: 50%;
+    background: #002AFF0F;
+}
+
+.right {
+    width: 50%;
+}
+
+.contextTitle {
+    margin: 2rem 0 2rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.titleText {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contextImageContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.emoji {
+    font-size: 1.3rem;
+}
+
+.rightEmoji {
+    margin: 0 0 0 1rem;
+}
+
+.leftEmoji {
+    margin: 0 1rem 0 0;
+}
+
+.createFormContainer {
+    margin: 6rem 0 0 0;
+}

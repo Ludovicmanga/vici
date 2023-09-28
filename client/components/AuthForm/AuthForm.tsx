@@ -9,6 +9,8 @@ import { login, signup } from "@/helpers/auth";
 import { User } from "@/types/constants";
 import Link from "next/link";
 import LoadingButton from "@mui/lab/LoadingButton";
+import Image from "next/image";
+import Logo from '@/public/illustrations/vici black logo.svg'
 
 type Props = {
   type: "login" | "sign-up";
@@ -43,6 +45,7 @@ const AuthForm = (props: Props) => {
 
   return (
     <div className={styles.container}>
+      <Image className={styles.logo} src={Logo} width={100} alt="logo" />
       <div className={styles.formWrapper}>
         <div className={styles.input}>
           <TextField

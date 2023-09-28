@@ -21,21 +21,6 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const checkUserIsLoggedIn = async () => {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/check-auth`,
-      {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-      }
-    );
-    const resData = await response.json();
-    if (resData.user) {
-      return resData.user;
-    } else {
-      return null;
-    }
-  };
 
   return (
     <html lang="fr">

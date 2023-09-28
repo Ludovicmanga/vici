@@ -5,6 +5,7 @@ export const checkAuthenticated = async (
     res,
     next: NextFunction,
   ) => {
+    
     if (req.isAuthenticated()) {
         next();
     } else {

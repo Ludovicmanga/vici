@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { setAllCards } from "@/redux/flashCardsSlice";
 import { checkAuthenticated } from "@/helpers/auth";
 import { redirect } from 'next/navigation';
+import EmptyComponent from "../EmptyComponent/EmptyComponent";
 
 type Props = {};
 
@@ -68,7 +69,7 @@ const CardsContainer = (props: Props) => {
         disableNextBtn={cardsListState.length <= 1}
       />
     ) : (
-      <div>No cards yet bro, <button onClick={() => redirect('/createCards')}>create some</button></div>
+      <EmptyComponent />
     );
   }
 

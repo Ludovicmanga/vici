@@ -36,8 +36,7 @@ const CreateForm = (props: Props) => {
   };
 
   return (
-    <div className={styles.container}>
-      <Paper className={styles.form}>
+      <div className={styles.form}>
         <div className={styles.input}>
           <TextField
             label="Question"
@@ -68,11 +67,10 @@ const CreateForm = (props: Props) => {
             )}
           />
         </div>
-        <Button size="large" variant="contained" onClick={createCard}>
+        <Button fullWidth size="large" variant="contained" onClick={createCard}>
           Créer
         </Button>
-      </Paper>
-    </div>
+      </div>
   );
 };
 

@@ -3,11 +3,11 @@
 import React, { useState } from "react";
 import styles from "./MainNavBar.module.scss";
 import { AiOutlineMenu } from "react-icons/ai";
-import Link from "next/link";
 import NavDrawer from "../NavDrawer/NavDrawer";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { redirect } from "next/navigation";
 import { logOut } from "@/helpers/auth";
+import Logo from "@/public/illustrations/vici white logo.svg";
+import Image from "next/image";
 
 type Props = {};
 
@@ -21,9 +21,9 @@ const MainNavBar = (props: Props) => {
 
   const handleLogout = async () => {
     await logOut(dispatch);
-  }
+  };
 
-  const loggedUserState = useAppSelector(state => state.loggedUser);
+  const loggedUserState = useAppSelector((state) => state.loggedUser);
 
   return (
     <div className={styles.container}>
@@ -32,10 +32,16 @@ const MainNavBar = (props: Props) => {
         <div onClick={handleToggleDrawer} className={styles.menuBtn}>
           <AiOutlineMenu />
         </div>
-        <div className={styles.title}>Vici</div>
+        <Image width={100} className={styles.logo} src={Logo} alt="logo" />
       </div>
       <div className={styles.right}>
-        {loggedUserState.user && loggedUserState.user.email ? <div className={styles.logoutBtn} onClick={handleLogout}>Se déconnecter</div> : 'Welcome ' + loggedUserState?.user?.email}
+        {loggedUserState.user && loggedUserState.user.email ? (
+          <div className={styles.logoutBtn} onClick={handleLogout}>
+            Se déconnecter
+          </div>
+        ) : (
+          "Welcome " + loggedUserState?.user?.email
+        )}
       </div>
     </div>
   );
