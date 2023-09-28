@@ -2,14 +2,23 @@
   padding: 0, 5rem;
 }
 
+.logoContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  margin: 0rem;
+}
+
 .ul {
-    margin: 5rem 0 0 0;
     display: flex;
     flex-direction: column;
 }
 
 .li {
-    margin: 5rem 0 0 1.5rem;
+    margin: 0.3rem 0 0 1rem;
     cursor: pointer;
     display: flex;
     justify-content: flex-start;
@@ -20,13 +29,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 0 0.3em 0;
+  margin: 0 0 0.9rem 0;
 }
 
 .navText {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 0 0 1em;
-  font-size: 1.6em;
+  font-size: 1rem;
+  margin: 0 0 0 1rem;
 }

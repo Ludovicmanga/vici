@@ -2,6 +2,8 @@ import React from "react";
 import { Drawer } from "@mui/material";
 import styles from "./NavDrawer.module.scss";
 import Link from "next/link";
+import Image from "next/image";
+import Logo from "@/public/illustrations/vici black logo.svg";
 
 type Props = {
   isOpen: boolean;
@@ -19,6 +21,9 @@ const NavDrawer = (props: Props) => {
       }}
     >
       <nav className={styles.container}>
+        <div className={styles.logoContainer}>
+          <Image className={styles.logo} src={Logo} width={100} alt="logo" />
+        </div>
         <div className={styles.ul}>
           <Link
             href="/"

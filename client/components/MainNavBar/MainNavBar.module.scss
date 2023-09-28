@@ -1,5 +1,5 @@
 .container {
-    min-height: 10vh;
+    min-height: 100px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -18,10 +18,8 @@
     cursor: pointer;
 }
 
-.title {
-    padding: 0 0 0 1.5rem;
-    font-size: 1.6rem;
-    font-weight: 500;
+.logo {
+    height: 5rem;
 }
 
 .drawer {
