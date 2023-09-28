@@ -1,15 +1,25 @@
+"use client";
+
 import React from "react";
 import styles from "./EmptyComponent.module.scss";
 import Image from "next/image";
 import BoxImg from "@/public/illustrations/box.png";
-import { Button } from "@mui/material";
+import { Button, Paper } from "@mui/material";
+import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 type Props = {};
 
 const EmptyComponent = (props: Props) => {
+  const router = useRouter();
+
+  const handleRedirectCreatePage = () => {
+    router.push('/createCards');
+  }
+
   return (
     <div className={styles.container}>
-      <div className={styles.wrapper}>
+      <Paper elevation={8} className={styles.wrapper}>
         <div className={styles.subWrapper}>
           <div className={styles.imgContainer}>
             <iframe
@@ -30,12 +40,12 @@ const EmptyComponent = (props: Props) => {
             </div>
             <div className={styles.btnContainer}>
               <div className={styles.rightHandEmoji}>👉</div>
-              <Button size="large" variant="contained">Créer des flash cards</Button>
+              <Button onClick={handleRedirectCreatePage} size="large" variant="contained">Créer des flash cards</Button>
               <div className={styles.leftHandEmoji}>👈</div>
             </div>
           </div>
         </div>
-      </div>
+      </Paper>
     </div>
   );
 };
