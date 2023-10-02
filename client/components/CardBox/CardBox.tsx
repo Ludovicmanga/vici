@@ -22,11 +22,11 @@ const CardBox = (props: Props) => {
 
   return (
     <div className={styles.container}>
-      <Card elevation={15} className={styles.cardContainer}>
+      <Card elevation={18} className={styles.cardContainer}>
         <CardContent>
           <div className={styles.top}>              {isFlipped ? (
                 <div className={styles.cardTitle}>
-                  <div>🤯</div>
+                  <div className={styles.cardTitleEmoji}>🤯</div>
                   <div className={styles.cardTitleText}>Réponse</div>
                 </div>
               ) : (
