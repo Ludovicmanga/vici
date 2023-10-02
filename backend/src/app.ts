@@ -1,6 +1,7 @@
 import express from "express";
 import flashCardsRouter from "./routes/flashcards.routes";
 import authRouter from './routes/auth.routes';
+import categoriesRouter from './routes/categories.routes';
 import cors from "cors";
 import passport from 'passport';
 import session from 'express-session';
@@ -35,5 +36,6 @@ app.use(express.json());
 
 app.use("/auth", authRouter);
 app.use("/flash-cards", flashCardsRouter);
+app.use("/categories", categoriesRouter);
 
 export default app;

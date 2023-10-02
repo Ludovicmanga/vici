@@ -191,4 +191,18 @@ describe("Flash cards API", () => {
         })
       );
   })
+
+  it('get all categories', async () => {
+    const allCategoriesResponse = await request(app)
+      .get("/categories/all")
+      .expect("Content-type", /json/)
+      .expect(200);
+
+      expect(allCategoriesResponse.body).toEqual(
+        expect.objectContaining({
+          id: expect.any(Number),
+          name: expect.any(String),
+        })
+      );
+  })
 });

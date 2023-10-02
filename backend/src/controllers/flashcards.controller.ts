@@ -2,7 +2,14 @@ import prisma from "../../prisma/prismaClient";
 
 export const getAllFlashcards = async (req, res, next) => {
   try {
-    const allCards = await prisma.flashCard.findMany();
+    const allCards = await prisma.flashCard.findMany({
+      where: {
+        userId: req.user.id,
+      },
+      include: {
+        category: true,
+      }
+    });
     res.status(200).json(allCards);
   } catch (e) {
     console.log(e, " is the error man...");
@@ -17,15 +24,20 @@ export const createFlashCard = async (req, res, next) => {
       data: {
         question,
         answer,
-        author: req.user.id,
+        author: {
+          connect: {
+            id: req.user.id,
+          }
+        },
         category: {
           connectOrCreate: {
             where: {
               name: category,
+              userId: req.user.id
             },
             create: {
               name: category,
-              author: req.user.id
+              userId: req.user.id
             },
           },
         },

@@ -22,29 +22,38 @@ const CardBox = (props: Props) => {
 
   return (
     <div className={styles.container}>
-      <Card className={styles.cardContainer}>
+      <Card elevation={15} className={styles.cardContainer}>
         <CardContent>
-          <div className={styles.top}>
-            <div className={styles.cardTitle}>
-              {isFlipped ? "🤯 Réponse" : "🤔 Question"}
+          <div className={styles.top}>              {isFlipped ? (
+                <div className={styles.cardTitle}>
+                  <div>🤯</div>
+                  <div className={styles.cardTitleText}>Réponse</div>
+                </div>
+              ) : (
+                <div className={styles.cardTitle}>
+                  <div>🤔</div>
+                  <div className={styles.cardTitleText}>Question</div>
+                </div>
+              )}
+            <div>
+              <Button
+                onClick={props.setNextActiveCard}
+                variant="contained"
+                startIcon={<div>👉</div>}
+                disabled={props.disableNextBtn}
+              >
+                <div className={styles.nextBtnText}>Carte suivante</div>
+              </Button>
             </div>
-            <Button
-              onClick={props.setNextActiveCard}
-              variant="contained"
-              startIcon={<div>👉</div>}
-              disabled={props.disableNextBtn}
-            >
-              Carte suivante
-            </Button>
           </div>
           {isFlipped ? (
-              <CardBoxVerso
-                setNextActiveCard={props.setNextActiveCard}
-                card={props.card}
-              />
-            ) : (
-              <CardBoxRecto card={props.card} flipTheCard={flipTheCard} />
-            )}
+            <CardBoxVerso
+              setNextActiveCard={props.setNextActiveCard}
+              card={props.card}
+            />
+          ) : (
+            <CardBoxRecto card={props.card} flipTheCard={flipTheCard} />
+          )}
         </CardContent>
       </Card>
     </div>

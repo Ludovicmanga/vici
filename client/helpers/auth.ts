@@ -1,9 +1,7 @@
 import { setUser } from "@/redux/loggedUserSlice";
 import { Dispatch } from "redux";
-import { redirect } from 'next/navigation'
 
 export const checkAuthenticated = async (dispatch: Dispatch) => {
-
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/check-auth`,
     {

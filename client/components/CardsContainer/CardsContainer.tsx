@@ -4,23 +4,24 @@ import React, { useEffect, useState } from "react";
 import CardBox from "../CardBox/CardBox";
 import { getAllCards } from "@/helpers/flashcards";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { setAllCards } from "@/redux/flashCardsSlice";
 import { checkAuthenticated } from "@/helpers/auth";
-import { redirect } from 'next/navigation';
 import EmptyComponent from "../EmptyComponent/EmptyComponent";
+import { FlashCard } from "@/types/constants";
 
 type Props = {};
 
 const CardsContainer = (props: Props) => {
   const dispatch = useAppDispatch();
-  const cardsListState = useAppSelector((state) => state.flashCards);
   const loggedUserState = useAppSelector((state) => state.loggedUser);
-  const [activeCard, setActiveCard] = useState(cardsListState[0]);
+  const [allCards, setAllCards] = useState<FlashCard[]>([]);
+  const [activeCard, setActiveCard] = useState<FlashCard | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleGetAllCards = async () => {
-    const allCards = await getAllCards();
+    const allCards: FlashCard[] = await getAllCards();
     if (allCards.length > 0) {
-      dispatch(setAllCards(allCards));
+      setAllCards(allCards)
+      setActiveCard(allCards[0])
     }
   };
 
@@ -29,10 +30,10 @@ const CardsContainer = (props: Props) => {
   }, []);
 
   useEffect(() => {
-    if (loggedUserState.user) {
+    if (loggedUserState?.user?.email) {
       handleGetAllCards();
     }
-  }, [loggedUserState.user]);
+  }, [loggedUserState.user?.email]);
 
   const setNextActiveCard = () => {
     const nextCard = selectRandomItem();
@@ -40,8 +41,8 @@ const CardsContainer = (props: Props) => {
       setActiveCard(nextCard);
     }
   };
-  const cardsListWithoutCurrent = cardsListState.filter(
-    (card) => card.id !== activeCard.id
+  const cardsListWithoutCurrent = allCards.filter(
+    (card) => card.id !== activeCard?.id
   );
   const totalImportance = cardsListWithoutCurrent.reduce(
     (total, item) => total + item.known,
@@ -61,12 +62,12 @@ const CardsContainer = (props: Props) => {
     }
   }
 
-  return cardsListState.length > 0 ? (
+  return activeCard && allCards.length > 0 ? (
       <CardBox
         key={activeCard.id}
         card={activeCard}
         setNextActiveCard={setNextActiveCard}
-        disableNextBtn={cardsListState.length <= 1}
+        disableNextBtn={allCards.length <= 1}
       />
     ) : (
       <EmptyComponent />
