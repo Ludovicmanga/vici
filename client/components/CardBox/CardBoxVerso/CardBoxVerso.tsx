@@ -4,13 +4,20 @@ import { Button } from "@mui/material";
 import { KnownledgeLevel } from "@/types/enums";
 import { updateKnowledgeLevel } from "@/helpers/flashcards";
 import { FlashCard } from "@/types/constants";
+import CustomSnackbar from "@/components/CustomSnackbar/CustomSnackbar";
 
 type Props = {
   card: FlashCard;
   setNextActiveCard: () => void;
+  setSnackBar: React.Dispatch<React.SetStateAction<{
+    open: boolean;
+    message: string;
+    severity: null | "success" | "error" | "warning" | "info";
+    action: React.ReactNode | null;
+}>>
 };
 
-const CardBoxVerso = (props: Props) => {
+const CardBoxVerso = (props: Props) => {  
   const handleUpdateKnowledgeLevel = async (
     updatedKnowledgeLevel: KnownledgeLevel
   ) => {
@@ -19,6 +26,12 @@ const CardBoxVerso = (props: Props) => {
       updatedKnowledgeLevel
     );
     if (response) {
+      props.setSnackBar({
+        open: true,
+        message: 'La carte a été mise à jour',
+        severity: 'success',
+        action: null,
+      })
       props.setNextActiveCard();
     }
   };
@@ -27,22 +40,22 @@ const CardBoxVerso = (props: Props) => {
     {
       label: "Parfaitement",
       type: KnownledgeLevel.veryWell,
-      icon: <div>😍</div>
+      icon: <div>😍</div>,
     },
     {
       label: "Bien",
       type: KnownledgeLevel.good,
-      icon: <div>😎</div>
+      icon: <div>😎</div>,
     },
     {
       label: "Bof",
       type: KnownledgeLevel.soso,
-      icon: <div>🙄</div>
+      icon: <div>🙄</div>,
     },
     {
       label: "Pas du tout",
       type: KnownledgeLevel.terrible,
-      icon: <div>🤬</div>
+      icon: <div>🤬</div>,
     },
   ];
 
@@ -63,15 +76,11 @@ const CardBoxVerso = (props: Props) => {
                   }
                   className={styles.btn}
                   variant="contained"
-                  startIcon={btn.icon}
-                  sx={{
-                    width: '100%',
-                    maxWidth: '100%',
-                    display: 'flex',
-                    justifyContent: 'flex-start'
-                  }}
                 >
-                  <div className={styles.btnLabel}>{btn.label}</div>
+                  <div className={styles.btnLabel}>
+                    <div className={styles.btnIcon}>{btn.icon}</div>
+                    <div className={styles.btnText}>{btn.label}</div>
+                  </div>
                 </Button>
               </div>
             ))}

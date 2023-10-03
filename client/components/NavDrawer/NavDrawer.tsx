@@ -1,9 +1,9 @@
 import React from "react";
-import { Drawer } from "@mui/material";
+import { Drawer, useMediaQuery } from "@mui/material";
 import styles from "./NavDrawer.module.scss";
 import Link from "next/link";
 import Image from "next/image";
-import Logo from "@/public/illustrations/vici black logo.svg";
+import Logo from "@/public/illustrations/vici_black.svg";
 
 type Props = {
   isOpen: boolean;
@@ -11,13 +11,15 @@ type Props = {
 };
 
 const NavDrawer = (props: Props) => {
+  const bigScreen = useMediaQuery('(min-width: 40rem)');
+
   return (
     <Drawer
       anchor="left"
       open={props.isOpen}
       onClose={() => props.setIsOpen(false)}
       PaperProps={{
-        sx: { width: "26%" },
+        sx: { width: bigScreen ? "18%" : "55%" },
       }}
     >
       <nav className={styles.container}>

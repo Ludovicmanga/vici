@@ -1,54 +1,88 @@
-.container {
-    display: flex;
+
+.top {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1.5rem 0 0 0;
 }
 
+.titleContainer {
+  display: flex;
+  font-weight: 600;
+}
+
+.sectionsContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
 .section {
-    padding: 2rem 3rem;
-    margin: 0.6rem;
+  padding: 2rem 3rem;
+  margin: 0.6rem;
 }
 
 .left {
-    width: 50%;
-    background: #002AFF0F;
+  display: none;
 }
 
 .right {
-    width: 50%;
-}
+    width: 90%;
+    margin: 1.5rem 0 0 0;
+  }
 
-.contextTitle {
-    margin: 2rem 0 2rem 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.2rem;
-    font-weight: 600;
+.titleText {
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
 }
 
 .titleText {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .contextImageContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .emoji {
-    font-size: 1.3rem;
+  font-size: 1.3rem;
 }
 
 .rightEmoji {
-    margin: 0 0 0 1rem;
+  margin: 0 0 0 1rem;
 }
 
 .leftEmoji {
-    margin: 0 1rem 0 0;
+  margin: 0 1rem 0 0;
 }
 
-.createFormContainer {
-    margin: 6rem 0 0 0;
+@media screen and (min-width: 40rem) {
+  .top {
+    font-size: 1.5rem;
+  }
+
+  .titleText {
+    font-size: 1.3rem;
+  }
+
+  .left {
+    display: flex;
+    width: 50%;
+    background: #002aff0f;
+  }
+
+  .right {
+    width: 50%;
+    margin: 0;
+  }
+
+  .section {
+    height: 24rem;
+  }
+  
 }

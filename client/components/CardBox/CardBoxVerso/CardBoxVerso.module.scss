@@ -1,47 +1,81 @@
 .answerContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 4rem;
-    font-size: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 4rem;
+  font-size: 2rem;
+  text-align: center;
 }
 
 .isKnownAnswerSectionContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem;
 }
 
 .isKnownAnswerSection {
-    width: 100%;
+  width: 100%;
 }
 
 .isKnownAnswerSectionTitle {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 1rem 0;
-    font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem 0;
+  font-size: 1.5rem;
 }
 
 .btnGroupContainer {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .btnContainer {
-    width: 35%;
-    margin: 0.4rem;
+  width: 35%;
+  margin: 0.4rem;
 }
 
 .btn {
-    margin: 0.5rem;
+  margin: 0.5rem;
+  width: 100%;
 }
 
 .btnLabel {
-    margin: 0 0 0 0.8rem;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.btnIcon {
+    font-size: 1.7rem;
+}
+
+.btnText {
+    display: none;
+}
+
+@media screen and (min-width: 40rem) {
+  .answerContainer {
+    font-size: 2.5rem;
+  }
+
+  .btnLabel {
+    font-size: 0.7rem;
+    justify-content: flex-start;
+  }
+
+  .btnText {
+    margin: 0 0 0 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .btnIcon {
+    font-size: 1rem;
+}
 }

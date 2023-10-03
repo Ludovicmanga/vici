@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
 import loggedUserReducer from './loggedUserSlice';
 import flashCardsReducer from './flashCardsSlice';
+import generalPropertiesReducer from './generalPropertiesSlice';
 
 export const store = configureStore({
   reducer: {
     loggedUser: loggedUserReducer,
-    flashCards: flashCardsReducer
+    flashCards: flashCardsReducer,
+    generalProperties: generalPropertiesReducer
   }
 })
 

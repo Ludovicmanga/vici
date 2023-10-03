@@ -13,11 +13,18 @@ export const flashCardsSlice = createSlice({
   reducers: {
     // Use the PayloadAction type to declare the contents of `action.payload`
     setAllCards: (state, action: PayloadAction<FlashCard[]>) => {
-      state = action.payload;
+      return state = action.payload;
+    },
+    addCards: (state, action: PayloadAction<FlashCard[]>) => {
+      state = [...state, ...action.payload];
+    },
+    deleteCards: (state, action: PayloadAction<FlashCard[]>) => {
+      const flashCardToDeleteIds = action.payload.map(cardToDelete => cardToDelete.id)
+      state = state.filter((card) => !flashCardToDeleteIds.includes(card.id));
     },
   },
 });
 
-export const { setAllCards } = flashCardsSlice.actions;
+export const { setAllCards, addCards, deleteCards } = flashCardsSlice.actions;
 
 export default flashCardsSlice.reducer;

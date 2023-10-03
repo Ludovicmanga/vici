@@ -27,6 +27,7 @@ export const updateKnowledgeLevel = async (
       body: JSON.stringify({
         cardToUpdate: cardWithUpdatedKnownProp,
       }),
+      credentials: 'include',
     }
   );
   return response;
