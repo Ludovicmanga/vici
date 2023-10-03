@@ -6,7 +6,8 @@
   "scripts": {
     "start:dev": "npx nodemon",
     "prisma": "npx prisma db push",
-    "test": "jest --watch --verbose"
+    "test": "jest --watch --verbose",
+    "start:prod": "npx tsx src/index.ts"
   },
   "repository": {
     "type": "git",
