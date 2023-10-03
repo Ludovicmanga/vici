@@ -2,10 +2,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  background: rgba(56, 98, 248, 0.04);
 }
 
 .cardContainer {
-  margin: 1rem 0 0 0;
   width: 90%;
   background: #1400ff16;
   min-height: 400px;
@@ -49,6 +49,10 @@
 }
 
 @media screen and (min-width: 40rem) {
+  .container {
+    justify-content: flex-start;
+  }
+  
   .cardTitle {
     font-size: 2rem;
   }
@@ -57,7 +61,7 @@
     display: block;
   }
 
-  .cardContainer {
-    width: 60%;
-  }
+  /* .cardContainer {
+    width: 90%;
+  } */
 }
