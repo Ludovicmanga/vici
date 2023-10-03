@@ -8,7 +8,7 @@
     "prisma": "npx prisma db push",
     "test": "jest --watch --verbose",
     "start:prod": "npx tsx src/index.ts",
-    "build": "npm install && npm run build"
+    "build": "npm install && npm run prisma"
   },
   "repository": {
     "type": "git",
