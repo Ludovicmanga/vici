@@ -77,7 +77,9 @@ export const updateFlashCard = async (req, res, next) => {
       where: {
         id: cardToUpdate.id,
       },
-      data: { ...cardToUpdate },
+      data: {
+        known: cardToUpdate.known
+      },
     });
     res.status(200).json(updatedCard);
   } catch (e) {
