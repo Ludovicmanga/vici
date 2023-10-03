@@ -103,7 +103,7 @@ const AuthForm = (props: Props) => {
               onClick={props.type === "login" ? handleLogin : handleSignUp}
               fullWidth
               loading={loading}
-              loadingIndicator="Loading…"
+              loadingIndicator="Chargement..."
               variant="contained"
             >
               {props.type === "login" ? "Se connecter" : "S'inscrire"}

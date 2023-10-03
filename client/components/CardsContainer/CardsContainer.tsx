@@ -11,6 +11,7 @@ import CustomSnackbar from "../CustomSnackbar/CustomSnackbar";
 import styles from "./CardsContainer.module.scss";
 import { Paper } from "@mui/material";
 import FilterMenu from "../FilterMenu/FilterMenu";
+import EmptySearch from "../EmptySearch/EmptySearch";
 
 type Props = {};
 
@@ -45,9 +46,10 @@ const CardsContainer = (props: Props) => {
   useEffect(() => {
     setFilteredCards((currArray) => {
       if (selectedCategories.length > 0) {
-        return currArray.filter((card) =>
+        const itemReturned = allCards.filter((card) =>
           selectedCategories.map((cat) => cat.id).includes(card.category.id)
         );
+        return itemReturned;
       } else {
         return allCards;
       }
@@ -65,7 +67,7 @@ const CardsContainer = (props: Props) => {
   useEffect(() => {
     setFilteredCards(allCards);
   }, [allCards]);
-  
+
   useEffect(() => {
     if (loggedUserState?.user?.email) {
       handleGetAllCards();
@@ -120,13 +122,17 @@ const CardsContainer = (props: Props) => {
           />
         </Paper>
         <div className={styles.cardContainer}>
-          { filteredCards.length > 0 ? (<CardBox
-            key={activeCard.id}
-            card={activeCard}
-            setNextActiveCard={setNextActiveCard}
-            disableNextBtn={filteredCards.length <= 1}
-            setSnackBar={setSnackBar}
-          />) : (<div>Empty</div>) }
+          {filteredCards.length > 0 ? (
+            <CardBox
+              key={activeCard.id}
+              card={activeCard}
+              setNextActiveCard={setNextActiveCard}
+              disableNextBtn={filteredCards.length < 2}
+              setSnackBar={setSnackBar}
+            />
+          ) : (
+            <EmptySearch />
+          )}
         </div>
       </div>
       <CustomSnackbar snackBar={snackBar} setSnackBar={setSnackBar} />

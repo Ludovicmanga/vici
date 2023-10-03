@@ -15,7 +15,7 @@ const FilterMenu = (props: Props) => {
       <div className={styles.pageTitleContainer}>
         <div className={styles.pageTitle}>
           <div className={styles.titleEmoji}>🔖</div>
-          <div className={styles.pageTitleText}>Filter by categories</div>
+          <div className={styles.pageTitleText}>Filtrer par catégorie</div>
         </div>
         <div className={styles.selectedCategoriesContainer}>
           {props.selectedCategories.map((cat) => (
