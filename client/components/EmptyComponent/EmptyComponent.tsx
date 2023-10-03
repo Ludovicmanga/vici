@@ -32,7 +32,7 @@ const EmptyComponent = (props: Props) => {
           </div>
           <div className={styles.bottomContainer}>
             <div className={styles.mainText}>
-              Vous n'avez pas encore créé de flash cards
+              Vous n&apos;avez pas encore créé de flash cards
             </div>
             <div className={styles.btnContainer}>
               <div className={styles.rightHandEmoji}>👉</div>
