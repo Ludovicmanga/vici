@@ -33,7 +33,7 @@ const NavDrawer = (props: Props) => {
             className={styles.li}
           >
             <div className={styles.emoji}>💪</div>
-            <div className={styles.navText}>S'entrainer</div>
+            <div className={styles.navText}>S&apos;entrainer</div>
           </Link>
           <Link
             href="/createCards"
