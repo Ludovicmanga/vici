@@ -7,6 +7,7 @@
 .wrapper {
   width: 80%;
   margin: 2rem;
+  background: rgba(0, 61, 153, 0.08)
 }
 
 .logoContainer {
@@ -57,7 +58,12 @@
 }
 
 .noAccountYetText {
+  text-align: center;
   margin: 1rem 0 0 0;
+}
+
+.noAccountYetTextLink:hover {
+  font-weight: 600;
 }
 
 @media screen and (min-width: 40rem) {

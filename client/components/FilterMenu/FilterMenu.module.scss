@@ -1,0 +1,43 @@
+.pageTitleContainer {
+    text-align: center;
+    width: 100%;
+}
+
+.pageTitle {
+    display: flex;
+    justify-content: center;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.titleEmoji {
+    font-size: 1.7rem;
+}
+
+.pageTitleText {
+    margin: 0 0 0 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.selectedCategoriesContainer {
+    margin: 2rem 1rem;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.categoriesContainer {
+    margin: 1rem 1rem;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.selectedChip {
+    background: rgba(33, 195, 29, 0.10);
+    margin: 0.4rem 0.3rem;
+}
+
+.chip {
+    margin: 0.7rem 0.3rem;
+}

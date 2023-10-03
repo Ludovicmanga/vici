@@ -23,7 +23,7 @@ const AuthForm = (props: Props) => {
   const [loading, setLoading] = useState(false);
   const dispatch = useAppDispatch();
 
-  const userState = useAppSelector(state => state.loggedUser);
+  const userState = useAppSelector((state) => state.loggedUser);
   const router = useRouter();
 
   const handleLogin = async () => {
@@ -43,16 +43,16 @@ const AuthForm = (props: Props) => {
       user: User | null;
     } = await signup(email, password);
     if (userResponse) {
-      router.push('/login');
+      router.push("/login");
     }
     setLoading(false);
   };
 
   useEffect(() => {
     if (userState.user) {
-        router.push('/');
+      router.push("/");
     }
-  }, [userState])
+  }, [userState]);
 
   return (
     <div className={styles.container}>
@@ -103,16 +103,18 @@ const AuthForm = (props: Props) => {
               onClick={props.type === "login" ? handleLogin : handleSignUp}
               fullWidth
               loading={loading}
-              loadingIndicator="Loading…"
+              loadingIndicator="Chargement..."
               variant="contained"
             >
               {props.type === "login" ? "Se connecter" : "S'inscrire"}
             </LoadingButton>
-            {props.type === "login" && (
-              <div className={styles.noAccountYetText}>
-                Pas de compte ? <Link href="/signUp">S'inscrire</Link>
-              </div>
-            )}
+
+            <div className={styles.noAccountYetText}>
+              {props.type === "login" ? "Pas de compte ? " : "Déjà un compte ? "}
+              <Link className={styles.noAccountYetTextLink} href={props.type === "login" ? "/signUp" : "/login"}>
+                {props.type === "login" ? "S'inscrire" : "Se connecter"}
+              </Link>
+            </div>
           </div>
         </div>
       </Paper>

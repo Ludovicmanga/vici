@@ -6,8 +6,12 @@ import { getAllCards } from "@/helpers/flashcards";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { checkAuthenticated } from "@/helpers/auth";
 import EmptyComponent from "../EmptyComponent/EmptyComponent";
-import { FlashCard } from "@/types/constants";
+import { Category, FlashCard } from "@/types/constants";
 import CustomSnackbar from "../CustomSnackbar/CustomSnackbar";
+import styles from "./CardsContainer.module.scss";
+import { Paper } from "@mui/material";
+import FilterMenu from "../FilterMenu/FilterMenu";
+import EmptySearch from "../EmptySearch/EmptySearch";
 
 type Props = {};
 
@@ -15,6 +19,7 @@ const CardsContainer = (props: Props) => {
   const dispatch = useAppDispatch();
   const loggedUserState = useAppSelector((state) => state.loggedUser);
   const [allCards, setAllCards] = useState<FlashCard[]>([]);
+  const [filteredCards, setFilteredCards] = useState<FlashCard[]>([]);
   const [activeCard, setActiveCard] = useState<FlashCard | null>(null);
   const [snackBar, setSnackBar] = useState<{
     open: boolean;
@@ -27,7 +32,8 @@ const CardsContainer = (props: Props) => {
     severity: null,
     action: null,
   });
-
+  const [selectedCategories, setSelectedCategories] = useState<Category[]>([]);
+  const cardCategories = allCards.map((card) => card.category);
 
   const handleGetAllCards = async () => {
     const allCards: FlashCard[] = await getAllCards();
@@ -38,8 +44,29 @@ const CardsContainer = (props: Props) => {
   };
 
   useEffect(() => {
+    setFilteredCards((currArray) => {
+      if (selectedCategories.length > 0) {
+        const itemReturned = allCards.filter((card) =>
+          selectedCategories.map((cat) => cat.id).includes(card.category.id)
+        );
+        return itemReturned;
+      } else {
+        return allCards;
+      }
+    });
+  }, [selectedCategories]);
+
+  useEffect(() => {
+    setNextActiveCard();
+  }, [filteredCards]);
+
+  useEffect(() => {
     checkAuthenticated(dispatch);
   }, []);
+
+  useEffect(() => {
+    setFilteredCards(allCards);
+  }, [allCards]);
 
   useEffect(() => {
     if (loggedUserState?.user?.email) {
@@ -53,7 +80,7 @@ const CardsContainer = (props: Props) => {
       setActiveCard(nextCard);
     }
   };
-  const cardsListWithoutCurrent = allCards.filter(
+  const cardsListWithoutCurrent = filteredCards.filter(
     (card) => card.id !== activeCard?.id
   );
   const totalImportance = cardsListWithoutCurrent.reduce(
@@ -74,17 +101,42 @@ const CardsContainer = (props: Props) => {
     }
   }
 
+  const handleGetUniqueCategories = cardCategories.reduce(
+    (acc: Category[], item: Category) => {
+      if (!acc.map((cat) => cat.id).includes(item.id)) {
+        acc.push(item);
+      }
+      return acc;
+    },
+    []
+  );
+
   return activeCard && allCards.length > 0 ? (
-    <>
-      <CardBox
-        key={activeCard.id}
-        card={activeCard}
-        setNextActiveCard={setNextActiveCard}
-        disableNextBtn={allCards.length <= 1}
-        setSnackBar={setSnackBar}
-      />
+    <div className={styles.container}>
+      <div className={styles.contentWrapper}>
+        <Paper elevation={11} className={styles.filterBox}>
+          <FilterMenu
+            selectedCategories={selectedCategories}
+            setSelectedCategories={setSelectedCategories}
+            allCategories={handleGetUniqueCategories}
+          />
+        </Paper>
+        <div className={styles.cardContainer}>
+          {filteredCards.length > 0 ? (
+            <CardBox
+              key={activeCard.id}
+              card={activeCard}
+              setNextActiveCard={setNextActiveCard}
+              disableNextBtn={filteredCards.length < 2}
+              setSnackBar={setSnackBar}
+            />
+          ) : (
+            <EmptySearch />
+          )}
+        </div>
+      </div>
       <CustomSnackbar snackBar={snackBar} setSnackBar={setSnackBar} />
-    </>
+    </div>
   ) : (
     <EmptyComponent />
   );
