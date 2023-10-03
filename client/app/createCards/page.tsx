@@ -7,30 +7,32 @@ type Props = {};
 
 const page = (props: Props) => {
   return (
-    <div className={styles.container}>
-      <Paper className={`${styles.section} ${styles.left}`}>
-        <div className={styles.contextTitle}>
+    <div>
+      <div className={styles.top}>
+        <div className={styles.titleContainer}>
           <div className={`${styles.emoji} ${styles.leftEmoji}`}>💪</div>
           <div className={styles.titleText}>
-            Crée des cartes et entraine ta mémoire !{" "}
+            Crée des cartes et entraine ta mémoire
           </div>
           <div className={`${styles.emoji} ${styles.rightEmoji}`}>💪</div>
         </div>
-        <div className={styles.contextImageContainer}>
-          <iframe
-            src="https://giphy.com/embed/WRQBXSCnEFJIuxktnw"
-            width="480"
-            height="307"
-            frameBorder="0"
-            allowFullScreen
-          />
-        </div>
-      </Paper>
-      <Paper className={`${styles.section} ${styles.right}`}>
-        <div className={styles.createFormContainer}>
+      </div>
+      <div className={styles.sectionsContainer}>
+        <Paper className={`${styles.section} ${styles.left}`}>
+          <div className={styles.contextImageContainer}>
+            <iframe
+              src="https://giphy.com/embed/WRQBXSCnEFJIuxktnw"
+              width="480"
+              height="307"
+              frameBorder="0"
+              allowFullScreen
+            />
+          </div>
+        </Paper>
+        <Paper className={`${styles.section} ${styles.right}`}>
           <CreateForm />
-        </div>
-      </Paper>
+        </Paper>
+      </div>
     </div>
   );
 };
