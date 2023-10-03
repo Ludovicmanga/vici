@@ -43,6 +43,9 @@ export const createFlashCard = async (req, res, next) => {
         },
         known: 1,
       },
+      include: {
+        category: true,
+      }
     });
 
     res.send(flashCard);
