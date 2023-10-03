@@ -1,0 +1,22 @@
+.filterBox {
+    display: none;
+}
+
+@media screen and (min-width: 40rem) {
+    .contentWrapper {
+        display: flex;
+        margin: 1rem 0 0 0;
+    }
+
+    .filterBox {
+        display: flex;
+        width: 30%;
+        padding: 3rem;
+        background: rgba(165, 25, 101, 0.14);
+    }
+
+    .cardContainer {
+        width: 70%;
+        margin: 0 0 0 3rem;
+    }
+}

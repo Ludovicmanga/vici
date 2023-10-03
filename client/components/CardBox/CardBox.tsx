@@ -1,9 +1,8 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Button, Card, CardContent } from "@mui/material";
 import styles from "./CardBox.module.scss";
-import { BiSolidRightArrow } from "react-icons/bi";
 import CardBoxRecto from "./CardBoxRecto/CardBoxRecto";
 import CardBoxVerso from "./CardBoxVerso/CardBoxVerso";
 import { FlashCard } from "@/types/constants";

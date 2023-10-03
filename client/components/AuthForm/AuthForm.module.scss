@@ -57,7 +57,12 @@
 }
 
 .noAccountYetText {
+  text-align: center;
   margin: 1rem 0 0 0;
+}
+
+.noAccountYetTextLink:hover {
+  font-weight: 600;
 }
 
 @media screen and (min-width: 40rem) {
