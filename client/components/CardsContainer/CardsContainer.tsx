@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { checkAuthenticated } from "@/helpers/auth";
 import EmptyComponent from "../EmptyComponent/EmptyComponent";
 import { FlashCard } from "@/types/constants";
+import CustomSnackbar from "../CustomSnackbar/CustomSnackbar";
 
 type Props = {};
 
@@ -15,13 +16,24 @@ const CardsContainer = (props: Props) => {
   const loggedUserState = useAppSelector((state) => state.loggedUser);
   const [allCards, setAllCards] = useState<FlashCard[]>([]);
   const [activeCard, setActiveCard] = useState<FlashCard | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [snackBar, setSnackBar] = useState<{
+    open: boolean;
+    message: string;
+    severity: null | "success" | "error" | "warning" | "info";
+    action: React.ReactNode | null;
+  }>({
+    open: false,
+    message: "",
+    severity: null,
+    action: null,
+  });
+
 
   const handleGetAllCards = async () => {
     const allCards: FlashCard[] = await getAllCards();
     if (allCards.length > 0) {
-      setAllCards(allCards)
-      setActiveCard(allCards[0])
+      setAllCards(allCards);
+      setActiveCard(allCards[0]);
     }
   };
 
@@ -63,15 +75,19 @@ const CardsContainer = (props: Props) => {
   }
 
   return activeCard && allCards.length > 0 ? (
+    <>
       <CardBox
         key={activeCard.id}
         card={activeCard}
         setNextActiveCard={setNextActiveCard}
         disableNextBtn={allCards.length <= 1}
+        setSnackBar={setSnackBar}
       />
-    ) : (
-      <EmptyComponent />
-    );
-  }
+      <CustomSnackbar snackBar={snackBar} setSnackBar={setSnackBar} />
+    </>
+  ) : (
+    <EmptyComponent />
+  );
+};
 
 export default CardsContainer;

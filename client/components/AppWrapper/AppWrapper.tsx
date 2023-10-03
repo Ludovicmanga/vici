@@ -5,6 +5,7 @@ import React, { ReactNode, useEffect, useState } from "react";
 import AuthForm from "../AuthForm/AuthForm";
 import { checkAuthenticated } from "@/helpers/auth";
 import StyledSkeleton from "../Skeleton/Skeleton";
+import { usePathname } from 'next/navigation'
 
 type Props = {
   children: ReactNode;
@@ -12,6 +13,7 @@ type Props = {
 
 const AppWrapper = (props: Props) => {
   const dispatch = useAppDispatch();
+  const pathName = usePathname();
 
   const handleCheckAuth = async () => {
     const authRes = await checkAuthenticated(dispatch);
@@ -23,7 +25,6 @@ const AppWrapper = (props: Props) => {
   };
   const loggedUserState = useAppSelector((state) => state.loggedUser);
   const [isLoadingAuth, setIsLoadingAuth] = useState(true);
-  const generalPropertiesState = useAppSelector(state => state.generalProperties);
 
   useEffect(() => {
     handleCheckAuth();
@@ -36,7 +37,7 @@ const AppWrapper = (props: Props) => {
       ) : loggedUserState.user ? (
         <div>{props.children}</div>
       ) : (
-        <AuthForm type="login" />
+        <AuthForm type={pathName === '/signUp' ? 'sign-up' : 'login'} />
       )}
     </>
   );

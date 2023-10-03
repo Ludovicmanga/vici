@@ -4,13 +4,20 @@ import { Button } from "@mui/material";
 import { KnownledgeLevel } from "@/types/enums";
 import { updateKnowledgeLevel } from "@/helpers/flashcards";
 import { FlashCard } from "@/types/constants";
+import CustomSnackbar from "@/components/CustomSnackbar/CustomSnackbar";
 
 type Props = {
   card: FlashCard;
   setNextActiveCard: () => void;
+  setSnackBar: React.Dispatch<React.SetStateAction<{
+    open: boolean;
+    message: string;
+    severity: null | "success" | "error" | "warning" | "info";
+    action: React.ReactNode | null;
+}>>
 };
 
-const CardBoxVerso = (props: Props) => {
+const CardBoxVerso = (props: Props) => {  
   const handleUpdateKnowledgeLevel = async (
     updatedKnowledgeLevel: KnownledgeLevel
   ) => {
@@ -19,6 +26,12 @@ const CardBoxVerso = (props: Props) => {
       updatedKnowledgeLevel
     );
     if (response) {
+      props.setSnackBar({
+        open: true,
+        message: 'La carte a été mise à jour',
+        severity: 'success',
+        action: null,
+      })
       props.setNextActiveCard();
     }
   };

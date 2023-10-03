@@ -6,7 +6,7 @@ import { AiOutlineMenu } from "react-icons/ai";
 import NavDrawer from "../NavDrawer/NavDrawer";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { logOut } from "@/helpers/auth";
-import Logo from "@/public/illustrations/vici white logo.svg";
+import Logo from "@/public/illustrations/vici_white.svg";
 import Image from "next/image";
 
 type Props = {};

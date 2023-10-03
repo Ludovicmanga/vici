@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Card, CardContent } from "@mui/material";
 import styles from "./CardBox.module.scss";
 import { BiSolidRightArrow } from "react-icons/bi";
@@ -12,10 +12,17 @@ type Props = {
   card: FlashCard;
   setNextActiveCard: () => void;
   disableNextBtn: boolean;
+  setSnackBar: React.Dispatch<React.SetStateAction<{
+    open: boolean;
+    message: string;
+    severity: null | "success" | "error" | "warning" | "info";
+    action: React.ReactNode | null;
+}>>
 };
 
 const CardBox = (props: Props) => {
   const [isFlipped, setIsFlipped] = useState(false);
+
   const flipTheCard = () => {
     setIsFlipped(true);
   };
@@ -24,17 +31,18 @@ const CardBox = (props: Props) => {
     <div className={styles.container}>
       <Card elevation={18} className={styles.cardContainer}>
         <CardContent>
-          <div className={styles.top}>              {isFlipped ? (
-                <div className={styles.cardTitle}>
-                  <div className={styles.cardTitleEmoji}>🤯</div>
-                  <div className={styles.cardTitleText}>Réponse</div>
-                </div>
-              ) : (
-                <div className={styles.cardTitle}>
-                  <div>🤔</div>
-                  <div className={styles.cardTitleText}>Question</div>
-                </div>
-              )}
+          <div className={styles.top}>
+            {isFlipped ? (
+              <div className={styles.cardTitle}>
+                <div className={styles.cardTitleEmoji}>🤯</div>
+                <div className={styles.cardTitleText}>Réponse</div>
+              </div>
+            ) : (
+              <div className={styles.cardTitle}>
+                <div>🤔</div>
+                <div className={styles.cardTitleText}>Question</div>
+              </div>
+            )}
             <div>
               <Button
                 onClick={props.setNextActiveCard}
@@ -50,6 +58,7 @@ const CardBox = (props: Props) => {
             <CardBoxVerso
               setNextActiveCard={props.setNextActiveCard}
               card={props.card}
+              setSnackBar={props.setSnackBar}
             />
           ) : (
             <CardBoxRecto card={props.card} flipTheCard={flipTheCard} />

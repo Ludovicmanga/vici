@@ -6,13 +6,15 @@ import styles from "./CreateForm.module.scss";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { checkAuthenticated } from "@/helpers/auth";
 import { Category, FlashCard } from "@/types/constants";
-import { Alert, Snackbar } from "@mui/material";
 import { getCategories } from "@/helpers/categories";
+import CustomSnackbar from "../CustomSnackbar/CustomSnackbar";
 import { useRouter } from "next/navigation";
 
 type Props = {};
 
 const CreateForm = (props: Props) => {
+  const router = useRouter();
+
   const [category, setCategory] = useState("");
   const [categoriesList, setCategoriesList] = useState<Category[]>([]);
   const [question, setQuestion] = useState("");
@@ -21,15 +23,16 @@ const CreateForm = (props: Props) => {
     open: boolean;
     message: string;
     severity: null | "success" | "error" | "warning" | "info";
+    action: React.ReactNode | null;
   }>({
     open: false,
     message: "",
     severity: null,
+    action: null,
   });
   const userState = useAppSelector((state) => state.loggedUser);
 
   const dispatch = useAppDispatch();
-  const router = useRouter();
 
   useEffect(() => {
     checkAuthenticated(dispatch);
@@ -38,7 +41,6 @@ const CreateForm = (props: Props) => {
   const handleGetCategories = async () => {
     const response = await getCategories();
     if (response) {
-      console.log(response, " is the response");
       setCategoriesList(response);
     }
   };
@@ -68,9 +70,19 @@ const CreateForm = (props: Props) => {
         open: true,
         message: "Votre carte a bien été créée !",
         severity: "success",
+        action: (
+          <Button onClick={() => router.push("/")}>Tester ma mémoire</Button>
+        ),
       });
+      setQuestion("");
+      setAnswer("");
+      setCategoriesList(curr => [...curr, response.category])
     }
   };
+
+  useEffect(() => {
+    console.log(categoriesList, " is the categores list");
+  }, [categoriesList]);
 
   return (
     <div className={styles.form}>
@@ -99,41 +111,19 @@ const CreateForm = (props: Props) => {
           options={categoriesList.map((cat) => cat.name)}
           onInputChange={(e, value) => setCategory(value)}
           renderInput={(params) => (
-            <TextField key={params.id} {...params} label="Categorie" />
+            <TextField
+              key={params.id}
+              {...params}
+              value={category}
+              label="Categorie"
+            />
           )}
         />
       </div>
       <Button fullWidth size="large" variant="contained" onClick={createCard}>
         Créer
       </Button>
-      <Snackbar
-        open={snackBar.open}
-        autoHideDuration={6000}
-        onClose={() =>
-          setSnackBar({
-            open: false,
-            message: "",
-            severity: null,
-          })
-        }
-      >
-        <Alert
-          onClose={() =>
-            setSnackBar({
-              open: false,
-              message: "",
-              severity: null,
-            })
-          }
-          severity={snackBar.severity || "success"}
-          sx={{ width: "100%" }}
-          action={
-            <Button onClick={() => router.push("/")}>Tester ma mémoire</Button>
-          }
-        >
-          {snackBar.message}
-        </Alert>
-      </Snackbar>
+      <CustomSnackbar snackBar={snackBar} setSnackBar={setSnackBar} />
     </div>
   );
 };

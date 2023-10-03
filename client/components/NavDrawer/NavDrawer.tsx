@@ -3,7 +3,7 @@ import { Drawer, useMediaQuery } from "@mui/material";
 import styles from "./NavDrawer.module.scss";
 import Link from "next/link";
 import Image from "next/image";
-import Logo from "@/public/illustrations/vici black logo.svg";
+import Logo from "@/public/illustrations/vici_black.svg";
 
 type Props = {
   isOpen: boolean;
