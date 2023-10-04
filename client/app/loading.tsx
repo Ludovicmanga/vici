@@ -1,4 +1,4 @@
-import StyledSkeleton from '@/components/Skeleton/Skeleton'
+import StyledSkeleton from '@/components/StyledSkeleton/StyledSkeleton'
 import React from 'react'
 
 type Props = {}

@@ -9,15 +9,17 @@ import EmptyComponent from "../EmptyComponent/EmptyComponent";
 import { Category, FlashCard } from "@/types/constants";
 import CustomSnackbar from "../CustomSnackbar/CustomSnackbar";
 import styles from "./CardsContainer.module.scss";
-import { Paper } from "@mui/material";
+import { Paper, Skeleton } from "@mui/material";
 import FilterMenu from "../FilterMenu/FilterMenu";
 import EmptySearch from "../EmptySearch/EmptySearch";
+import StyledSkeleton from "../StyledSkeleton/StyledSkeleton";
 
 type Props = {};
 
 const CardsContainer = (props: Props) => {
   const dispatch = useAppDispatch();
   const loggedUserState = useAppSelector((state) => state.loggedUser);
+  const [isLoading, setIsLoading] = useState(true);
   const [allCards, setAllCards] = useState<FlashCard[]>([]);
   const [filteredCards, setFilteredCards] = useState<FlashCard[]>([]);
   const [activeCard, setActiveCard] = useState<FlashCard | null>(null);
@@ -41,6 +43,7 @@ const CardsContainer = (props: Props) => {
       setAllCards(allCards);
       setActiveCard(allCards[0]);
     }
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -111,7 +114,9 @@ const CardsContainer = (props: Props) => {
     []
   );
 
-  return activeCard && allCards.length > 0 ? (
+  return isLoading ? (
+    <StyledSkeleton />
+  ) : activeCard && allCards.length > 0 ? (
     <div className={styles.container}>
       <div className={styles.contentWrapper}>
         <Paper elevation={11} className={styles.filterBox}>

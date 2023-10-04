@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import React, { ReactNode, useEffect, useState } from "react";
 import AuthForm from "../AuthForm/AuthForm";
 import { checkAuthenticated } from "@/helpers/auth";
-import StyledSkeleton from "../Skeleton/Skeleton";
+import StyledSkeleton from "../StyledSkeleton/StyledSkeleton";
 import { usePathname } from 'next/navigation'
 
 type Props = {

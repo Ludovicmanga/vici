@@ -1,6 +1,6 @@
 "use client";
 
-import { Autocomplete, Button, TextField } from "@mui/material";
+import { Autocomplete, Button, Skeleton, TextField } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import styles from "./CreateForm.module.scss";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
@@ -19,6 +19,7 @@ const CreateForm = (props: Props) => {
   const [categoriesList, setCategoriesList] = useState<Category[]>([]);
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const [snackBar, setSnackBar] = useState<{
     open: boolean;
     message: string;
@@ -52,6 +53,7 @@ const CreateForm = (props: Props) => {
   }, [userState.user]);
 
   const createCard = async () => {
+    setIsLoading(true);
     const response: FlashCard = await fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/flash-cards/create`,
       {
@@ -66,6 +68,10 @@ const CreateForm = (props: Props) => {
       }
     ).then(async (res) => res.json());
     if (response) {
+      setQuestion("");
+      setAnswer("");
+      setCategoriesList((curr) => [...curr, response.category]);
+      setIsLoading(false);
       setSnackBar({
         open: true,
         message: "Votre carte a bien été créée !",
@@ -74,55 +80,63 @@ const CreateForm = (props: Props) => {
           <Button onClick={() => router.push("/")}>Tester ma mémoire</Button>
         ),
       });
-      setQuestion("");
-      setAnswer("");
-      setCategoriesList(curr => [...curr, response.category])
     }
   };
 
-  useEffect(() => {
-    console.log(categoriesList, " is the categores list");
-  }, [categoriesList]);
-
   return (
     <div className={styles.form}>
-      <div className={styles.input}>
-        <TextField
-          label="Question"
-          variant="outlined"
-          fullWidth
-          value={question}
-          onChange={(e) => setQuestion(e.target.value)}
-        />
-      </div>
-      <div className={styles.input}>
-        <TextField
-          label="Réponse"
-          variant="outlined"
-          fullWidth
-          value={answer}
-          onChange={(e) => setAnswer(e.target.value)}
-        />
-      </div>
-      <div className={styles.input}>
-        <Autocomplete
-          freeSolo
-          autoSelect
-          options={categoriesList.map((cat) => cat.name)}
-          onInputChange={(e, value) => setCategory(value)}
-          renderInput={(params) => (
+      {isLoading ? (
+        <>
+          <Skeleton height={100} />
+          <Skeleton height={100} />
+          <Skeleton height={100} />
+        </>
+      ) : (
+        <>
+          <div className={styles.input}>
             <TextField
-              key={params.id}
-              {...params}
-              value={category}
-              label="Categorie"
+              label="Question"
+              variant="outlined"
+              fullWidth
+              value={question}
+              onChange={(e) => setQuestion(e.target.value)}
             />
-          )}
-        />
-      </div>
-      <Button fullWidth size="large" variant="contained" onClick={createCard}>
-        Créer
-      </Button>
+          </div>
+          <div className={styles.input}>
+            <TextField
+              label="Réponse"
+              variant="outlined"
+              fullWidth
+              value={answer}
+              onChange={(e) => setAnswer(e.target.value)}
+            />
+          </div>
+          <div className={styles.input}>
+            <Autocomplete
+              freeSolo
+              autoSelect
+              options={categoriesList.map((cat) => cat.name)}
+              onInputChange={(e, value) => setCategory(value)}
+              renderInput={(params) => (
+                <TextField
+                  key={params.id}
+                  {...params}
+                  value={category}
+                  label="Categorie"
+                />
+              )}
+            />
+          </div>
+          <Button
+            fullWidth
+            size="large"
+            variant="contained"
+            onClick={createCard}
+          >
+            Créer
+          </Button>
+        </>
+      )}
       <CustomSnackbar snackBar={snackBar} setSnackBar={setSnackBar} />
     </div>
   );
