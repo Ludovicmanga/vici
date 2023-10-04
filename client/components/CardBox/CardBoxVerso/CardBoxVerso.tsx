@@ -9,15 +9,18 @@ import CustomSnackbar from "@/components/CustomSnackbar/CustomSnackbar";
 type Props = {
   card: FlashCard;
   setNextActiveCard: () => void;
-  setSnackBar: React.Dispatch<React.SetStateAction<{
-    open: boolean;
-    message: string;
-    severity: null | "success" | "error" | "warning" | "info";
-    action: React.ReactNode | null;
-}>>
+  setSnackBar: React.Dispatch<
+    React.SetStateAction<{
+      open: boolean;
+      message: string;
+      severity: null | "success" | "error" | "warning" | "info";
+      action: React.ReactNode | null;
+    }>
+  >;
+  flipTheCard: () => void;
 };
 
-const CardBoxVerso = (props: Props) => {  
+const CardBoxVerso = (props: Props) => {
   const handleUpdateKnowledgeLevel = async (
     updatedKnowledgeLevel: KnownledgeLevel
   ) => {
@@ -28,10 +31,11 @@ const CardBoxVerso = (props: Props) => {
     if (response) {
       props.setSnackBar({
         open: true,
-        message: 'La carte a été mise à jour',
-        severity: 'success',
+        message: "La carte a été mise à jour",
+        severity: "success",
         action: null,
-      })
+      });
+      props.flipTheCard();
       props.setNextActiveCard();
     }
   };
