@@ -7,8 +7,8 @@
     "start:dev": "npx nodemon",
     "prisma": "npx prisma db push",
     "test": "jest --watch --verbose",
-    "start:prod": "npx tsx src/index.ts",
-    "build": "npm install"
+    "start:prod": "npm install && npx tsx src/index.ts",
+    "build": ""
   },
   "repository": {
     "type": "git",
