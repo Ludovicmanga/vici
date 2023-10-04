@@ -12,6 +12,7 @@ import LoadingButton from "@mui/lab/LoadingButton";
 import Image from "next/image";
 import Logo from "@/public/illustrations/vici_black.svg";
 import { useRouter } from "next/navigation";
+import CustomSnackbar from "../CustomSnackbar/CustomSnackbar";
 
 type Props = {
   type: "login" | "sign-up";
@@ -21,6 +22,23 @@ const AuthForm = (props: Props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [pageMode, setPageMode] = useState(props.type);
+  const [snackBar, setSnackBar] = useState<{
+    open: boolean;
+    message: string;
+    severity: null | "success" | "error" | "warning" | "info";
+    action: React.ReactNode | null;
+  }>({
+    open: false,
+    message: "",
+    severity: null,
+    action: null,
+  });
+
+  useEffect(() => {
+    setPageMode(props.type);
+  }, [props.type])
+
   const dispatch = useAppDispatch();
 
   const userState = useAppSelector((state) => state.loggedUser);
@@ -43,7 +61,13 @@ const AuthForm = (props: Props) => {
       user: User | null;
     } = await signup(email, password);
     if (userResponse) {
-      router.push("/login");
+      setSnackBar({
+        open: true,
+        severity: 'success',
+        action: null,
+        message: 'Votre compte a bien été créé !'
+      })
+      setPageMode('login');
     }
     setLoading(false);
   };
@@ -66,7 +90,7 @@ const AuthForm = (props: Props) => {
             <div className={styles.iframeContainer}>
               <iframe
                 src={
-                  props.type === "login"
+                  pageMode === "login"
                     ? "https://giphy.com/embed/Yy6GhtIk8l76u8nlIF"
                     : "https://giphy.com/embed/mCbUi0FyYhHHhutEV8"
                 }
@@ -80,7 +104,7 @@ const AuthForm = (props: Props) => {
           </div>
           <div className={styles.formWrapper}>
             <div className={styles.pageTitle}>
-              {props.type === "login" ? "Se connecter" : "S'inscrire"}
+              {pageMode === "login" ? "Se connecter" : "S'inscrire"}
             </div>
             <div className={styles.input}>
               <TextField
@@ -100,23 +124,24 @@ const AuthForm = (props: Props) => {
               ></TextField>
             </div>
             <LoadingButton
-              onClick={props.type === "login" ? handleLogin : handleSignUp}
+              onClick={pageMode === "login" ? handleLogin : handleSignUp}
               fullWidth
               loading={loading}
               loadingIndicator="Chargement..."
               variant="contained"
             >
-              {props.type === "login" ? "Se connecter" : "S'inscrire"}
+              {pageMode === "login" ? "Se connecter" : "S'inscrire"}
             </LoadingButton>
 
             <div className={styles.noAccountYetText}>
-              {props.type === "login" ? "Pas de compte ? " : "Déjà un compte ? "}
-              <Link className={styles.noAccountYetTextLink} href={props.type === "login" ? "/signUp" : "/login"}>
-                {props.type === "login" ? "S'inscrire" : "Se connecter"}
+              {pageMode === "login" ? "Pas de compte ? " : "Déjà un compte ? "}
+              <Link className={styles.noAccountYetTextLink} href={pageMode === "login" ? "/signUp" : "/login"}>
+                {pageMode === "login" ? "S'inscrire" : "Se connecter"}
               </Link>
             </div>
           </div>
         </div>
+        <CustomSnackbar snackBar={snackBar} setSnackBar={setSnackBar} />
       </Paper>
     </div>
   );
