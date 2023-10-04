@@ -19,7 +19,6 @@ app.use(
     extended: true,
   })
 );
-console.log(process.env.NODE_ENV === "production", ' is the secure flag');
 app.enable('trust proxy')
 app.use(
   session({
@@ -31,7 +30,7 @@ app.use(
       maxAge: 24 * 60 * 60 * 1000,
       httpOnly: true,
       sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-      domain: 'vici.onrender.com',
+      domain: process.env.NODE_ENV === "production" ? 'vici.onrender.com' : 'localhost',
     },
   })
 );
