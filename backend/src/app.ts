@@ -11,7 +11,7 @@ import "./config/passport.setup";
 app.use(
   cors({
     credentials: true,
-    origin: ["http://localhost:3000", "https://vici-31p9.vercel.app"],
+    origin: ["http://localhost:3000", "https://vici-brown.vercel.app/"],
   })
 );
 app.use(
