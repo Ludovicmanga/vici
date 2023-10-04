@@ -19,6 +19,7 @@ app.use(
     extended: true,
   })
 );
+app.enable('trust proxy')
 app.use(
   session({
     secret: "nkrekjverjvrekjverkjvre",
