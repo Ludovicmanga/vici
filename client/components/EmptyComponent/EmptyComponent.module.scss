@@ -1,60 +1,82 @@
 .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
 }
 
 .wrapper {
-    display: flex;
-    height: 95%;
-    width: 95%;
-    background: #145FFF0C;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    padding: 3rem;
+  display: flex;
+  height: 95%;
+  width: 95%;
+  background: #145fff0c;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  padding: 3rem;
 }
 
 .subWrapper {
-    display: flex;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
 .imgContainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: none;
 }
 
 .bottomContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin: 0 0 0 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .mainText {
-    display: flex;
-    align-items: center;
-    justify-content:center;
-    font-size: 1.4rem;
-    margin: 1em 0;
-    font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  margin: 1em 0;
+  font-weight: 600;
+  text-align: center;
 }
 
 .btnContainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 1rem 0 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem 0 0 0;
 }
 
 .rightHandEmoji {
-    margin: 0 2rem 0 0;
-    font-size: 3rem;
+  display: none;
 }
 
 .leftHandEmoji {
-    margin: 0 0 0 2rem;
-    font-size: 3rem;
+  display: none;
 }
 
+@media screen and (min-width: 40rem) {
+  .bottomContainer {
+    margin: 0 0 0 4rem;
+  }
+
+  .imgContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .rightHandEmoji {
+    display: flex;
+    margin: 0 2rem 0 0;
+    font-size: 3rem;
+  }
+
+  .leftHandEmoji {
+    display: flex;
+    margin: 0 0 0 2rem;
+    font-size: 3rem;
+  }
+}
