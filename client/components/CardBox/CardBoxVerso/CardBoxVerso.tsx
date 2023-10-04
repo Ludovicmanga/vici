@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import styles from "./CardBoxVerso.module.scss";
-import { Button } from "@mui/material";
+import { Button, Skeleton } from "@mui/material";
 import { KnownledgeLevel } from "@/types/enums";
 import { updateKnowledgeLevel } from "@/helpers/flashcards";
 import { FlashCard } from "@/types/constants";
-import CustomSnackbar from "@/components/CustomSnackbar/CustomSnackbar";
 
 type Props = {
   card: FlashCard;
@@ -21,9 +20,12 @@ type Props = {
 };
 
 const CardBoxVerso = (props: Props) => {
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleUpdateKnowledgeLevel = async (
     updatedKnowledgeLevel: KnownledgeLevel
   ) => {
+    setIsLoading(true);
     const response = await updateKnowledgeLevel(
       props.card,
       updatedKnowledgeLevel
@@ -37,6 +39,7 @@ const CardBoxVerso = (props: Props) => {
       });
       props.flipTheCard();
       props.setNextActiveCard();
+      setIsLoading(false);
     }
   };
 
@@ -74,7 +77,7 @@ const CardBoxVerso = (props: Props) => {
           <div className={styles.btnGroupContainer}>
             {btns.map((btn) => (
               <div className={styles.btnContainer} key={btn.type}>
-                <Button
+                { isLoading ? <Skeleton height={50} /> : <Button
                   onClick={async () =>
                     await handleUpdateKnowledgeLevel(btn.type)
                   }
@@ -85,7 +88,7 @@ const CardBoxVerso = (props: Props) => {
                     <div className={styles.btnIcon}>{btn.icon}</div>
                     <div className={styles.btnText}>{btn.label}</div>
                   </div>
-                </Button>
+                </Button> }
               </div>
             ))}
           </div>
