@@ -23,7 +23,7 @@ const CardBox = (props: Props) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
   const flipTheCard = () => {
-    setIsFlipped(true);
+    setIsFlipped(!isFlipped);
   };
 
   return (
@@ -58,6 +58,7 @@ const CardBox = (props: Props) => {
               setNextActiveCard={props.setNextActiveCard}
               card={props.card}
               setSnackBar={props.setSnackBar}
+              flipTheCard={flipTheCard}
             />
           ) : (
             <CardBoxRecto card={props.card} flipTheCard={flipTheCard} />
