@@ -12,7 +12,6 @@ import styles from "./CardsContainer.module.scss";
 import { Paper, Skeleton } from "@mui/material";
 import FilterMenu from "../FilterMenu/FilterMenu";
 import EmptySearch from "../EmptySearch/EmptySearch";
-import StyledSkeleton from "../StyledSkeleton/StyledSkeleton";
 
 type Props = {};
 
@@ -114,31 +113,53 @@ const CardsContainer = (props: Props) => {
     []
   );
 
-  return isLoading ? (
-    <StyledSkeleton />
-  ) : activeCard && allCards.length > 0 ? (
+  return activeCard && allCards.length > 0 ? (
     <div className={styles.container}>
       <div className={styles.contentWrapper}>
-        <Paper elevation={11} className={styles.filterBox}>
-          <FilterMenu
-            selectedCategories={selectedCategories}
-            setSelectedCategories={setSelectedCategories}
-            allCategories={handleGetUniqueCategories}
-          />
-        </Paper>
-        <div className={styles.cardContainer}>
-          {filteredCards.length > 0 ? (
-            <CardBox
-              key={activeCard.id}
-              card={activeCard}
-              setNextActiveCard={setNextActiveCard}
-              disableNextBtn={filteredCards.length < 2}
-              setSnackBar={setSnackBar}
+        {isLoading ? (
+          <div className={styles.filterSkeletonContainer}>
+            <Skeleton
+              width={"100%"}
+              height={700}
+              sx={{
+                marginTop: -15,
+              }}
             />
-          ) : (
-            <EmptySearch />
-          )}
-        </div>
+          </div>
+        ) : (
+          <Paper elevation={11} className={styles.filterBox}>
+            <FilterMenu
+              selectedCategories={selectedCategories}
+              setSelectedCategories={setSelectedCategories}
+              allCategories={handleGetUniqueCategories}
+            />
+          </Paper>
+        )}
+        {isLoading ? (
+          <div className={styles.cardsSkeletonContainer}>
+            <Skeleton
+              width={"100%"}
+              height={700}
+              sx={{
+                marginTop: -15,
+              }}
+            />
+          </div>
+        ) : (
+          <div className={styles.cardContainer}>
+            {filteredCards.length > 0 ? (
+              <CardBox
+                key={activeCard.id}
+                card={activeCard}
+                setNextActiveCard={setNextActiveCard}
+                disableNextBtn={filteredCards.length < 2}
+                setSnackBar={setSnackBar}
+              />
+            ) : (
+              <EmptySearch />
+            )}
+          </div>
+        )}
       </div>
       <CustomSnackbar snackBar={snackBar} setSnackBar={setSnackBar} />
     </div>
